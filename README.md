@@ -9,6 +9,15 @@ data UnaryOp = Sin | Cos | Tan | Ln
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log
 data Expression = Con String | Var String | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression
 
+
+(d/dx f(x)) + (d/dx g(x))!!!!!!!!
+-  unary?????
+
+
+
+
+
+
 data Law = Law String Equation
 type Equation = (Expression, Expression)
 data Step = Step LawName Expression
