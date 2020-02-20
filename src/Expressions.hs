@@ -37,26 +37,23 @@ unary_op = do{ s<- some (ch); return s}
 free_variable = do{ s<- some (ch); return s}
 
 
--- digit = cvt <$> (satisfy isDigit) 
---   where cvt d = fromEnum d - (fromEnum '0')
+digit = cvt <$> satisfy isDigit  --(elem ['0'])
+  where cvt d = fromEnum d - (fromEnum '0')
 -- digit = do {c <- satisfy (isDigit); return c}
 -- digits = do{s<- some (digitChar); return s}
 
-expr = do{
-          num <- digits;
-          op <- get_op; -- + - * / ^
-          if op 'elem' precedence1 then
-              else if op 'elem' precedence2 
-                  then rest <- expr;
-                       return (BiExpr Name?? num rest) 
-                  else 
+-- expr = do{
+--           num <- digits;
+--           op <- get_op; -- + - * / ^
+--           if op 'elem' precedence1 then
+--               else if op 'elem' precedence2 
+--                   then rest <- expr;
+--                        return (BiExpr Name?? num rest) 
+--                   else 
           
-          }
-       <|> (unary_op >>=)
+--           }
+--        <|> (unary_op >>=)
 
 
 
-binary_exp e1 = 
-
-
---  num/ freevariable /sin,ln
+-- binary_exp e1 = 
