@@ -4,10 +4,10 @@
 ## Data structures
 
 ```haskell
-data Derivative = Derivative Expression Expression
-data UnaryOp = Sin | Cos | Tan | Ln 
-data BinaryOp = Add | Sub | Mul | Div | Pow | Log
-data Expression = Con String | Var String | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression
+data Derivative = Derivative Expression Expression 
+data UnaryOp = Sin | Cos | Tan | Ln | Minus deriving Show
+data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
+data Expression = Con String | Var String | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression deriving Show
 
 
 (d/dx f(x)) + (d/dx g(x))!!!!!!!!
