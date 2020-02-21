@@ -77,7 +77,7 @@ parserBinaryOp = space *> ((string "+" *> return Add)
 parserDerivative :: Parser Expression
 parserDerivative = do 
                   space
-                  vari <- parserExpression
+                  vari <- parserVar
                   string ","
                   space
                   expression <- parserExpression
@@ -102,12 +102,13 @@ parserBiExpr = do
 
 
 parserExpression :: Parser Expression
-parserExpression = space *> ( try (char '(' *> parserExpression <* char ')')
-                              <|> parserExpressionHelper)
+-- parserExpression = space *> ( try (char '(' *> parserExpression <* char ')')
+--                               <|> parserExpressionHelper)
+parserExpression = space *> (parserCon
+                              <|> parserVar
+                              <|> (char '(' *> parserExpressionHelper <* char ')'))
                
 parserExpressionHelper :: Parser Expression
-parserExpressionHelper = space *> (try (parserCon) 
-                  <|> try (parserVar)
+parserExpressionHelper = space *> (try (parserBiExpr) 
                   <|> try (parserDerivative)
-                  <|> try (parserSingleExpr)
-                  <|>  (parserBiExpr))
+                  <|> try (parserSingleExpr))
