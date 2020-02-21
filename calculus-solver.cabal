@@ -27,7 +27,8 @@ source-repository head
 
 library
   exposed-modules:
-      Expressions
+      Expressions, 
+      Laws
   other-modules:
       Paths_calculus_solver
   hs-source-dirs:

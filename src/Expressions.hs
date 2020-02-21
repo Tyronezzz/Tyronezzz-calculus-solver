@@ -1,8 +1,9 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module Expressions
-    ( someFunc
-    ) where
+module Expressions where
+--     ( someFunc
+--     ) 
+
 
 import Data.Char
 import Text.Megaparsec
@@ -164,7 +165,7 @@ parserSinExpr = space *> try(do{
 
 
 
-
+-- "x, a+b" = "x, a" + "x, b" 
 
 
 
