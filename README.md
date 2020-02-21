@@ -47,3 +47,26 @@ The input would be a string. First, the variable which we would do the derivatio
 
 After designing the data structures, we will work on laws, calculations and rewrite. 
 
+
+
+## Basic Parsing
+
+We changed our `Expression` in order to solve the problem that in your feedback to the following:
+
+```haskell
+data Expression = Con Int 
+                  | Var String 
+                  | Derivative Expression Expression 
+                  | SinExpr UnaryOp Expression 
+                  | BiExpr BinaryOp Expression Expression deriving Show
+```
+
+So, now each step could also include a derivative expression. 
+
+Also, we wrote a parser that could parse our problems. For example:
+
+```haskell
+Input: parseTest parserExpression "(x, ((3 log x) + 6))"
+Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
+```
+
