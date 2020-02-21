@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wall #-}
+
 module Expressions
     ( someFunc
     ) where
@@ -109,12 +111,14 @@ parserExpressionHelper = space *> (try (parserBiExpr)
 
 -- another version of parsing in book
 -- brackets explicitly
+-- space??
 
-addOp :: Parser UnaryOp
+
+addOp :: ParsecT Void String Identity BinaryOp
 addOp = space *> ((string "+" *> return Add)
      <|> (string "-" *> return Sub))
 
-mulOP :: Parser BinaryOp
+mulOp :: ParsecT Void String Identity BinaryOp
 mulOp = space *> ((string "*" *> return Mul)
      <|> (string "/" *> return Div)
      <|> (string "^" *> return Pow)
@@ -124,20 +128,24 @@ expr :: Parser Expression
 expr = space *> (term >>= rest)
 
 
+rest :: Expression -> ParsecT Void String Identity Expression
 rest e1 = space *> do {
                        p <- addOp;
                        e2 <- term;
                        rest (BiExpr p e1 e2)}
           <|> return e1
 
+term :: ParsecT Void String Identity Expression
 term = space *>  (factor >>= more)
 
+more :: Expression -> ParsecT Void String Identity Expression
 more e1 = space *> do {
                        p <- mulOp;
                        e2 <- factor;
                        more (BiExpr p e1 e2)}
           <|> return e1
 
+factor :: ParsecT Void String Identity Expression
 factor = space *>  (try parserSinExpr <|> try ( string "(" *> expr <*space <* string ")")  )
 
 
