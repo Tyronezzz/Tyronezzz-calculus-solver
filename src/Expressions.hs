@@ -14,10 +14,14 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 
-data Derivative = Derivative Expression Expression deriving Show
+-- data Derivative = Derivative Expression Expression deriving Show
 data UnaryOp = Sin | Cos | Tan | Ln | Minus deriving Show
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
-data Expression = Con String | Var String | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression deriving Show
+data Expression = Con String 
+                  | Var String 
+                  | Derivative Expression Expression 
+                  | SinExpr UnaryOp Expression 
+                  | BiExpr BinaryOp Expression Expression deriving Show
 
 
 
