@@ -94,47 +94,21 @@ parserSingleExpr = do
 parserBiExpr :: Parser Expression
 parserBiExpr = do 
                space
-               expression1 <- parserCon
+               expression1 <- parserExpression
                operator <- parserBinaryOp
-               expression2 <- parserCon
+               expression2 <- parserExpression
                return (BiExpr operator expression1 expression2)
 
 
 
 parserExpression :: Parser Expression
--- parserExpression = space *> ( try( do{
---                                  exp1 <- char '(' *> parserExpression <* space  <* char ')';
---                                  op <- space *> parserBinaryOp;
---                                  exp2 <- space *> parserExpression;
---                                  return (BiExpr op exp1 exp2)})
---                               <|> try (do{
---                                      exp1 <- char '(' *> parserExpression <* space <* char ')';
---                                      return exp1;})
+-- parserExpression = space *> ( try (char '(' *> parserExpression <* char ')')
 --                               <|> parserExpressionHelper)
-
-
-parserExpression = space *> ( try( do{
-                                 exp1 <- char '(' *> parserExpression <* space  <* char ')';
-                                 op <- space *> parserBinaryOp;
-                                 exp2 <- space *> parserExpression;
-                                 return (BiExpr op exp1 exp2)})
-                              <|> try (do{
-                                     exp1 <- char '(' *> parserExpression <* space <* char ')';
-                                     return exp1;})
-                              <|> try( do{
-                                          exp1 <-  parserExpression <* space ;
-                                          op <- space *> parserBinaryOp;
-                                          exp2 <- space *> parserExpression;
-                                          return (BiExpr op exp1 exp2)})      
-                              <|> parserExpressionHelper)
-
-
-  --  parseTest parserExpression "(3 * 5) + 6" 
-  --  parseTest parserExpression "(2 - (3 * 5))" 
+parserExpression = space *> (parserCon
+                              <|> parserVar
+                              <|> (char '(' *> parserExpressionHelper <* char ')'))
+               
 parserExpressionHelper :: Parser Expression
 parserExpressionHelper = space *> (try (parserBiExpr) 
-                  <|> try (parserSingleExpr)
-                  <|> try (parserCon)
-                  <|> try (parserVar)
-                  <|> try (parserDerivative)   
-                  )
+                  <|> try (parserDerivative)
+                  <|> try (parserSingleExpr))
