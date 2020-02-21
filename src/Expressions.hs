@@ -25,14 +25,6 @@ data Expression = Con Int
 
 
 
-precedence1 = ["^"];
-precedence2 = ["*", "/"];
-precedence3 = ["+", "-"];
-
---  "x, x*3 + x^2"
-
-
-
 ch :: Parser Char
 ch = do {c <- satisfy (isAlpha); return c}
 
@@ -102,8 +94,6 @@ parserBiExpr = do
 
 
 parserExpression :: Parser Expression
--- parserExpression = space *> ( try (char '(' *> parserExpression <* char ')')
---                               <|> parserExpressionHelper)
 parserExpression = space *> (parserCon
                               <|> parserVar
                               <|> (char '(' *> parserExpressionHelper <* char ')'))
@@ -112,3 +102,61 @@ parserExpressionHelper :: Parser Expression
 parserExpressionHelper = space *> (try (parserBiExpr) 
                   <|> try (parserDerivative)
                   <|> try (parserSingleExpr))
+
+
+
+
+
+-- another version of parsing in book
+-- brackets explicitly
+
+addOp :: Parser UnaryOp
+addOp = space *> ((string "+" *> return Add)
+     <|> (string "-" *> return Sub))
+
+mulOP :: Parser BinaryOp
+mulOp = space *> ((string "*" *> return Mul)
+     <|> (string "/" *> return Div)
+     <|> (string "^" *> return Pow)
+     <|> (string "log" *> return Log))
+
+expr :: Parser Expression
+expr = space *> (term >>= rest)
+
+
+rest e1 = space *> do {
+                       p <- addOp;
+                       e2 <- term;
+                       rest (BiExpr p e1 e2)}
+          <|> return e1
+
+term = space *>  (factor >>= more)
+
+more e1 = space *> do {
+                       p <- mulOp;
+                       e2 <- factor;
+                       more (BiExpr p e1 e2)}
+          <|> return e1
+
+factor = space *>  (try parserSinExpr <|> try ( string "(" *> expr <*space <* string ")")  )
+
+
+parserSinExpr :: Parser Expression
+parserSinExpr = space *> try(do{  
+                                   operator <- parserUnaryOp;
+                                   expression <- parserVar;
+                                   return (SinExpr operator expression)})
+                    <|>try (do{
+                              operator <- parserUnaryOp;
+                              expression <- parserCon;
+                              return (SinExpr operator expression)})
+                    <|> try parserCon
+                    <|> try parserVar
+
+
+
+
+
+
+
+
