@@ -10,13 +10,6 @@ data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
 data Expression = Con String | Var String | Derivative Expression Expression | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression deriving Show
 
 
-(d/dx f(x)) + (d/dx g(x))!!!!!!!!
--  unary?????
-
-
-
-
-
 
 data Law = Law String Equation
 type Equation = (Expression, Expression)

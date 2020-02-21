@@ -15,7 +15,7 @@ someFunc = putStrLn "someFunc"
 
 
 -- data Derivative = Derivative Expression Expression deriving Show
-data UnaryOp = Sin | Cos | Tan | Ln | Minus deriving Show
+data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving Show
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
 data Expression = Con String 
                   | Var String 
@@ -46,17 +46,17 @@ digit = cvt <$> satisfy isDigit  --(elem ['0'])
 -- digit = do {c <- satisfy (isDigit); return c}
 -- digits = do{s<- some (digitChar); return s}
 
--- expr = do{
---           num <- digits;
---           op <- get_op; -- + - * / ^
---           if op 'elem' precedence1 then
---               else if op 'elem' precedence2 
---                   then rest <- expr;
---                        return (BiExpr Name?? num rest) 
---                   else 
+expr = do{
+          num <- digits;
+          op <- get_op; -- + - * / ^
+          if op 'elem' precedence1 then
+              else if op 'elem' precedence2 
+                  then rest <- expr;
+                       return (BiExpr Name?? num rest) 
+                  else 
           
---           }
---        <|> (unary_op >>=)
+          }
+       <|> (unary_op >>=)
 
 
 
