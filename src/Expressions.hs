@@ -77,7 +77,7 @@ parserBinaryOp = space *> ((string "+" *> return Add)
 parserDerivative :: Parser Expression
 parserDerivative = do 
                   space
-                  vari <- parserExpression
+                  vari <- parserVar
                   string ","
                   space
                   expression <- parserExpression
