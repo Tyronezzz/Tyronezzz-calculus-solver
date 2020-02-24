@@ -122,8 +122,10 @@ addOp = space *> ((string "+" *> return Add)
 mulOp :: ParsecT Void String Identity BinaryOp
 mulOp = space *> ((string "*" *> return Mul)
      <|> (string "/" *> return Div)
-     <|> (string "^" *> return Pow)
      <|> (string "log" *> return Log))
+
+mulOp :: ParsecT Void String Identity BinaryOp
+powOp = space *> (string "^" *> return Pow)
 
 expr :: Parser Expression
 expr = space *> (term >>= rest)
@@ -137,11 +139,20 @@ rest e1 = space *> do {
           <|> return e1
 
 term :: ParsecT Void String Identity Expression
-term = space *>  (factor >>= more)
+term = space *>  (factor2 >>= more)
 
 more :: Expression -> ParsecT Void String Identity Expression
 more e1 = space *> do {
                        p <- mulOp;
+                       e2 <- factor2;
+                       more (BiExpr p e1 e2)}
+          <|> return e1
+
+
+factor2 = space *> (factor >>= powexpr)
+
+powexpr e1 = space *> do {
+                       p <- powOp;
                        e2 <- factor;
                        more (BiExpr p e1 e2)}
           <|> return e1
@@ -153,19 +164,15 @@ factor = space *>  (try parserSinExpr <|> try ( string "(" *> expr <*space <* st
 parserSinExpr :: Parser Expression
 parserSinExpr = space *> try(do{  
                                    operator <- parserUnaryOp;
-                                   expression <- parserVar;
+                                   expression <- expr;  -- parserVar??
                                    return (SinExpr operator expression)})
                     <|>try (do{
                               operator <- parserUnaryOp;
-                              expression <- parserCon;
+                              expression <- expr;
                               return (SinExpr operator expression)})
                     <|> try parserCon
                     <|> try parserVar
 
-
-
-
--- "x, a+b" = "x, a" + "x, b" 
 
 
 
