@@ -124,7 +124,7 @@ mulOp = space *> ((string "*" *> return Mul)
      <|> (string "/" *> return Div)
      <|> (string "log" *> return Log))
 
-mulOp :: ParsecT Void String Identity BinaryOp
+powOp :: ParsecT Void String Identity BinaryOp
 powOp = space *> (string "^" *> return Pow)
 
 expr :: Parser Expression
@@ -148,9 +148,10 @@ more e1 = space *> do {
                        more (BiExpr p e1 e2)}
           <|> return e1
 
-
+factor2 :: ParsecT Void String Identity Expression
 factor2 = space *> (factor >>= powexpr)
 
+powexpr :: Expression -> ParsecT Void String Identity Expression
 powexpr e1 = space *> do {
                        p <- powOp;
                        e2 <- factor;
