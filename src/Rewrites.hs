@@ -8,8 +8,14 @@ import Data.Functor.Identity (Identity)
 import Expressions
 import Laws 
 
--- rewrites :: Equation -> Expression -> [Expression]
--- rewrites = 
+
+rewrites :: Equation -> Expression -> [Expression]
+rewrites eqn (Con n) = []
+rewrites eqn (Var v) = []
+rewrites eqn (Derivative v e) = map Derivative v (rewrites eqn e)
+rewrites eqn (BiExpr biOp e1 e2) = 
+rewrites eqn (SinExpr uOp e) = 
+
 
 
 

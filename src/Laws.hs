@@ -28,6 +28,7 @@ parserEquation = do{
 
 
 sortLaws :: [Law] -> Expression -> [Law]
+sortLaws 
 -- sortLaws laws = simple ++ others ++ defns
 --      where
 --      (simple, nonsimple) = partition isSimple laws
