@@ -17,7 +17,6 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 
--- data Derivative = Derivative Expression Expression deriving Show
 data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving Show
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
 data Expression = Con Int 
@@ -113,7 +112,6 @@ parserExpressionHelper = space *> (try (parserBiExpr)
 -- another version of parsing in book
 -- brackets explicitly
 -- space??
-basicOps = addOp <|> mulOp
 
 
 addOp :: ParsecT Void String Identity BinaryOp

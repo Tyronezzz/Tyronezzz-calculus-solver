@@ -39,7 +39,7 @@ We plan to use stdin for the inputs. The format of the input is as follows:
 
 ```haskell
 The input would be a string. First, the variable which we would do the derivation on is given before a comma. Then the expression will be provided. For example:
-"x, x * y * sin(x)"
+"(x, x * y * sin(x))"
 ```
 
 
