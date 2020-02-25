@@ -26,14 +26,14 @@ parserEquation = do{
                     exp2 <- space *> expr;
                     return (exp1, exp2)}
 
-
+sortLaws :: [Law] -> Expression -> [Law]
 -- sortLaws laws = simple ++ others ++ defns
 --      where
 --      (simple, nonsimple) = partition isSimple laws
 --      (defns, others)     = partition isDefn nonsimple
 
 
-partition p xs = (filter p xs, filter (not . p) xs)
+-- partition p xs = (filter p xs, filter (not . p) xs)
 
 
 -- isSimple (Law _ (Expression as1,Expression as2)) = length as1 > length as2
