@@ -31,6 +31,7 @@ After parsing: "BiExpr Add (Var x) (BiExpr Pow (BiExpr Sub (BiExpr Div (Con 6) (
 
 ```
 
+<!-- BiExpr Add (BiExpr Add (Con 1) (Con 2)) (Con 3) -->
 
 
 ## Input format

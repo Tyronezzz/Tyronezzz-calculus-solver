@@ -37,7 +37,7 @@ parserVar :: Parser Expression
 parserVar = do{ space ;str <- parserString; return (Var str)}
 
 digit :: Parser Int
-digit = cvt <$> satisfy isDigit  --(elem ['0'])
+digit = cvt <$> satisfy isDigit  
   where cvt d = fromEnum d - (fromEnum '0')
 
 digits :: Parser Int
