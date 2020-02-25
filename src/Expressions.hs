@@ -113,6 +113,7 @@ parserExpressionHelper = space *> (try (parserBiExpr)
 -- another version of parsing in book
 -- brackets explicitly
 -- space??
+basicOps = addOp <|> mulOp
 
 
 addOp :: ParsecT Void String Identity BinaryOp
@@ -159,7 +160,7 @@ powexpr e1 = space *> do {
           <|> return e1
 
 factor :: ParsecT Void String Identity Expression
-factor = space *>  (try parserSinExpr <|> try ( string "(" *> expr <*space <* string ")")  )
+factor = space *>  (try parserSinExpr <|> try oneDeriv <|> try ( string "(" *> expr <*space <* string ")"))
 
 
 parserSinExpr :: Parser Expression
@@ -174,6 +175,11 @@ parserSinExpr = space *> try(do{
                     <|> try parserCon
                     <|> try parserVar
 
-
-
-
+oneDeriv :: ParsecT Void String Identity Expression
+oneDeriv =  do{ 
+                _ <- string "(";
+               vari <- space *> parserVar;
+               _ <- string ",";
+               expression <- space *> parserExpression;
+               _ <- string ")";
+               return (Derivative vari expression);}                        
