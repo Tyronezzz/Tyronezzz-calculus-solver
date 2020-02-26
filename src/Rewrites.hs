@@ -23,6 +23,7 @@ anyOne :: (a -> [a]) -> [a] -> [[a]]
 anyOne f [] = []
 anyOne f (x:xs) = [x':xs | x' <- f x] ++
                   [x:xs' | xs' <- anyOne f xs]
+<<<<<<< HEAD
 
 -- list all the patterns here
 -- Con Int 
@@ -53,3 +54,6 @@ splits (Con s) = [ ([], [Con s] ), ([Con s], []) ]
 --                 (as2,as3) <- splits bs]
 
 -- rewritesSeg :: Equation -> 
+=======
+            
+>>>>>>> 127df6fdf9e63b6e3dbb83de51a279dde73f0c71

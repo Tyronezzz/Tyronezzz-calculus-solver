@@ -11,6 +11,7 @@ import Laws
 
 data Step = Step LawName Expression
 data Calculation = Calc Expr [Step] 
+type LawName = String
 
 calculate :: [Law] -> Expression -> Calculation
 calculate laws e = Calc e (manyStep rws e)

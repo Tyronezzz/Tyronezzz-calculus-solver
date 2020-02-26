@@ -52,12 +52,17 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
 
-
-
-
-
 ## Reason with configurable rules
 Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you.
+
+
+
+
+
+
+
+
+
 
 <!-- 
 We changed our `Expression` in order to solve the problem that in your feedback to the following:
@@ -78,4 +83,3 @@ Also, we wrote a parser that could parse our problems. For example:
 Input: parseTest parserExpression "(x, ((3 log x) + 6))"
 Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
- -->
