@@ -1,6 +1,5 @@
 # calculus-solver
 
-
 ## Data structures
 
 ```haskell
@@ -8,7 +7,6 @@
 data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving Show
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
 data Expression = Con String | Var String | Derivative Expression Expression | SinExpr UnaryOp Expression | BiExpr BinaryOp Expression Expression deriving Show
-
 
 
 data Law = Law String Equation
@@ -54,11 +52,12 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
 
-## Laws and Rewrites
 
 
 
 
+## Reason with configurable rules
+Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you.
 
 <!-- 
 We changed our `Expression` in order to solve the problem that in your feedback to the following:
