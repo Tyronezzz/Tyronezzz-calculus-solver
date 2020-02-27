@@ -15,6 +15,17 @@ apply :: Expression -> Subst -> Expression
 apply (BiExpr op e1 e2) subst | binding subst (BiExpr op e1 e2) != Nothing  =  binding subst (BiExpr op e1 e2)       
                               | otherwise                                   =  BiExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else (binding subst e1)) (if (binding subst e2) == Nothing then (apply e2 subst) else (binding subst e2))
                                     
+apply (SinExpr op e1) subst | binding subst (SinExpr op e1) != Nothing = binding subst (SinExpr op e1)
+                            | otherwise = SinExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else (binding subst e1) )
+
+apply (Derivative e1 e2) subst | binding subst (Derivative e1 e2) != Nothing = binding subst (Derivative e1 e2)
+                               | otherwise Derivative e1 (if (binding subst e2) == Nothing then (apply e2 subst) else (binding subst e2))
+
+apply (Con num) subst | binding subst (Con num) != Nothing = binding subst (Con num)
+                      | otherwise Con num
+
+apply (Var v) subst | binding subst (Var v) != Nothing = binding subst (Var v)
+                    | otherwise Var v
 
 
 
