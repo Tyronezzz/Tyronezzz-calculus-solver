@@ -17,13 +17,13 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 
-data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving Show
-data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving Show
+data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving (Show, Eq)
+data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving (Show, Eq)
 data Expression = Con Int 
                   | Var String 
                   | Derivative Expression Expression 
                   | SinExpr UnaryOp Expression 
-                  | BiExpr BinaryOp Expression Expression deriving Show
+                  | BiExpr BinaryOp Expression Expression deriving (Show, Eq)
 
 
 

@@ -1,7 +1,7 @@
 module Matchings (match)
 where
 import Expressions
-import Substitutions (Subst, unitSub, combine)
+import Substitutions (Subst)
 import Utilities (parts)
 
 
