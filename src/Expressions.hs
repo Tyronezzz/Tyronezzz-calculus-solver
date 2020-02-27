@@ -178,6 +178,6 @@ oneDeriv =  do{
                 _ <- string "(";
                vari <- space *> parserVar;
                _ <- string ",";
-               expression <- space *> parserExpression;
+               expression <- space *> expr;
                _ <- string ")";
                return (Derivative vari expression);}                        
