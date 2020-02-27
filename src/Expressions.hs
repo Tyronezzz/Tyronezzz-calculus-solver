@@ -27,6 +27,14 @@ data Expression = Con Int
 
 
 
+-- instance Show Expression where
+--      showsPrec p (Var v) = showString v
+--      showsPrec p (Con c) = showInt c --showsPrec p a
+--      showsPrec p (SinExpr op e) = 
+--      showsPrec p (BinaryOp op e1 e2) = 
+--      showsPrec p (Derivative e1 e2) = 
+
+
 ch :: Parser Char
 ch = do {c <- satisfy (isAlpha); return c}
 
