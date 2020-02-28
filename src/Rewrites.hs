@@ -31,3 +31,9 @@ rewrites (eqn_l, eqn_r) (Var v) = [(Var v)]
 -- apply laws on on expr and get the new expr 
 helper :: Equation -> Expression -> [Expression]
 helper (el, er) exp = [apply er subst | subst <- Match.match el exp]
+
+equation = (law_left, law_right)
+law_left =  BiExpr Add (Var "x") (Var "y")
+law_right = BiExpr Add (Var "y") (Var "x")
+
+e1 = BiExpr Add (Con 2) (Con 3)
