@@ -14,6 +14,7 @@ data Calculation = Calc Expression [Step]  deriving Show
 type LawName = String
 
 i2 = Derivative (Var "x") (BiExpr Sub (BiExpr Mul (Con 2) (Var "x")) (BiExpr Pow (Var "x") (Con 3)))
+i3 = Derivative (Var "z") (BiExpr Pow (Var "x") (Var "y"))
 -- (x, 2*x - x^3)
 
 calculate :: [Law] -> Expression -> Calculation

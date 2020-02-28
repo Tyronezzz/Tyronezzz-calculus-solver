@@ -53,9 +53,10 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
         Law "power" (Derivative (Var "x") (BiExpr Pow (Var "a") (Var "b")),BiExpr Mul (BiExpr Pow (Var "a") (Var "b")) (Derivative (Var "x") (BiExpr Mul (Var "b") (SinExpr Ln (Var "a"))))),
 
-        Law "derivativeSelf" (Derivative (Var "x") (Var "x"),Con 1),
+        Law "derivativeSelf" (Derivative (Var "x") (Var "x"),Con 1)
         
-        Law "derivativeCon" (Derivative (Var "x") (Con _),Con 0)]
+        -- Law "derivativeCon" (Derivative (Var "x") (Con _),Con 0)
+        ]
 
 
 
