@@ -8,5 +8,8 @@ version              1.0.0.0
 Changed the logic of parsing input expressions and add the module for laws, caculations and rewrites. Still have bugs in rewrites.
 
 
+version              1.0.0.1
+Complete the rewrites, but bugs in Match.
+
 
 ## Unreleased changes
