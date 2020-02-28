@@ -5,18 +5,12 @@ import Substitutions (Subst)
 
 
 
--- type Subst = [(Expression, Expression)]
-
-
-
-
--- law:   x + x
--- input: 3 + 3
+-- if law and expr are match, they must have same op
+-- law:   x + 4
+-- input: 3 + 4
 -- [[]]
 -- []
 
-
--- if law and expr are match, they must have same op
 match :: Expression -> Expression -> [Subst]
 
 match (Derivative s1 eqn) (Derivative s2 e) = match eqn e
