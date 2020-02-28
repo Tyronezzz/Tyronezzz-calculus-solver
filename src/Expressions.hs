@@ -13,6 +13,11 @@ import Data.Functor.Identity (Identity)
 
 type Parser = ParsecT Void String Identity
 
+
+
+data Law = Law String Equation deriving Show
+type Equation = (Expression, Expression)
+
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
