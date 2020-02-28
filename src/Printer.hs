@@ -6,7 +6,7 @@ import Expressions
 import Laws
 import Calculations
 
--- pretty print Expression
+--  print Expression
 instance Pretty Expression where
     pretty (Con num) = pretty num
     pretty (Var s) = pretty s
@@ -18,7 +18,7 @@ instance Pretty Expression where
                                         (cat [lparen <> nest 2 (pretty e1  <> softline <> align ( pretty biOp) <> softline <> align ( pretty e2)), rparen])
 
 
--- pretty print Unary operator
+--  print Unary operator
 instance Pretty UnaryOp where
     pretty Sin = pretty "sin"
     pretty Cos = pretty "cos"
@@ -26,7 +26,7 @@ instance Pretty UnaryOp where
     pretty Ln = pretty "ln"
     pretty Neg = pretty "-"
 
--- pretty print Binary operator
+--  print Binary operator
 instance Pretty BinaryOp where
     pretty Add = pretty "+"
     pretty Sub = pretty "-"
@@ -36,9 +36,14 @@ instance Pretty BinaryOp where
     pretty Log = pretty "log"
 
 
--- instance Pretty Law where
---     pretty (Law name eqn) = 
 
--- instance Pretty Step where
---     pretty (Step lName e) = 
---         lbrace
+--print Step
+instance Pretty Step where
+    pretty (Step lName e) = 
+        lbrace <> pretty lName <> rbrace <> line <> equals <> align (cat [lparen <> hang 2  ( pretty e), rparen]) <> line
+                                        
+ --print Calculation                                       
+instance Pretty Calculation where
+    pretty (Calc e ss) = align (lparen <>  ( pretty e ) <> rparen) <> line <> align (sep (map pretty ss))
+                                      
+
