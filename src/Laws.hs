@@ -10,8 +10,7 @@ import Data.Functor.Identity (Identity)
 import Expressions
 import Data.List (partition)
 
-data Law = Law String Equation deriving Show
-type Equation = (Expression, Expression)
+
 
 parserLaw :: Parser Law
 parserLaw = do{

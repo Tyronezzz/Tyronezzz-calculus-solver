@@ -1,9 +1,7 @@
-module Substitutions 
-      (Subst)
-where
+module Substitutions where
+      --(Subst, apply)
 
 import Expressions
-import Utilities (cp)
 import Data.Maybe (fromJust)
 
 -- (varName, expr)
@@ -12,23 +10,24 @@ type Subst = [(Expression, Expression)]
 -- replace the vars in subst with vars in expr
 apply :: Expression -> Subst -> Expression
 
-
-apply (BiExpr op e1 e2) subst | binding subst (BiExpr op e1 e2) != Nothing  =  binding subst (BiExpr op e1 e2)       
-                              | otherwise                                   =  BiExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else (binding subst e1)) (if (binding subst e2) == Nothing then (apply e2 subst) else (binding subst e2))
-                                    
-apply (SinExpr op e1) subst | binding subst (SinExpr op e1) != Nothing = binding subst (SinExpr op e1)
-                            | otherwise = SinExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else (binding subst e1) )
-
-apply (Derivative e1 e2) subst | binding subst (Derivative e1 e2) != Nothing = binding subst (Derivative e1 e2)
-                               | otherwise Derivative e1 (if (binding subst e2) == Nothing then (apply e2 subst) else (binding subst e2))
+apply (BiExpr op e1 e2) subst = if(binding subst (BiExpr op e1 e2) /= Nothing) then fromJust (binding subst (BiExpr op e1 e2))
+                                else BiExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else fromJust (binding subst e1)) (if (binding subst e2) == Nothing then (apply e2 subst) else fromJust (binding subst e2))
 
 
-apply (Con num) subst | binding subst (Con num) != Nothing = binding subst (Con num)
-                      | otherwise Con num
-
-apply (Var v) subst | binding subst (Var v) != Nothing = binding subst (Var v)
-                    | otherwise Var v
+apply (SinExpr op e1) subst  = if(binding subst (SinExpr op e1) /= Nothing ) then fromJust (binding subst (SinExpr op e1))
+                              else SinExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else fromJust (binding subst e1))
 
 
-binding :: Subst -> Expression -> Expression
-binding sub v = fromJust (lookup v sub)
+apply (Derivative e1 e2) subst = if(binding subst (Derivative e1 e2) /= Nothing) then fromJust (binding subst (Derivative e1 e2))
+                                  else Derivative e1 (if (binding subst e2) == Nothing then (apply e2 subst) else fromJust (binding subst e2))
+
+apply (Con num) subst = if (binding subst (Con num)) /= Nothing then fromJust (binding subst (Con num))
+                        else Con num
+
+apply (Var v) subst = if(binding subst (Var v) /= Nothing) then fromJust (binding subst (Var v)) 
+                      else Var v
+
+
+
+binding :: Subst -> Expression -> Maybe Expression
+binding sub v =  lookup v sub

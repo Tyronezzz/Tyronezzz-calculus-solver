@@ -23,9 +23,10 @@ data Expression = Con Int
                   | Var String 
                   | Derivative Expression Expression 
                   | SinExpr UnaryOp Expression 
-                  | BiExpr BinaryOp Expression Expression deriving Show
+                  | BiExpr BinaryOp Expression Expression deriving (Show, Eq)
 
-
+data Law = Law String Equation deriving Show
+type Equation = (Expression, Expression)
 
 -- instance Show Expression where
 --      showsPrec p (Var v) = showString v
