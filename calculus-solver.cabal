@@ -32,7 +32,8 @@ library
       Calculations,
       Match,
       Rewrites,
-      Substitutions
+      Substitutions,
+      Printer
   other-modules:
       Paths_calculus_solver
   hs-source-dirs:
