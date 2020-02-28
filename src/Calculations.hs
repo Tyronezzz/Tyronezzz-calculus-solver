@@ -10,7 +10,7 @@ import Rewrites
 import Laws 
 
 data Step = Step LawName Expression
-data Calculation = Calc Expr [Step] 
+data Calculation = Calc Expression [Step] 
 type LawName = String
 
 calculate :: [Law] -> Expression -> Calculation
