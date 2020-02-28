@@ -31,3 +31,6 @@ apply (Var v) subst = if(binding subst (Var v) /= Nothing) then fromJust (bindin
 
 binding :: Subst -> Expression -> Maybe Expression
 binding sub v =  lookup v sub
+
+sub = [(Var "x",Con 2),(Var "y",Con 3)]
+eee = BiExpr Add (Var "y") (Var "x")

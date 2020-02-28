@@ -8,10 +8,14 @@ import Data.Functor.Identity (Identity)
 import Expressions
 import Laws 
 import Substitutions
+import Match
 
 -- rewrites (eqn_l, eqn_r) e returns a list of all expressions that can arise by matching some subexpression 
 -- of e against the left-hand expression of (eqn_l, eqn_r) and replacing the subexpression with the
 --  appropriate instance of the right-hand expression of (eqn_l, eqn_r).
+
+input = Derivative (Var "x") (BiExpr Add (Var "a") (Var "b"))
+eqn = (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Derivative (Var "x") (BiExpr Add (Var "b") (Var "a")))
 
 
 -- For Binary expr,  we can consider rewrites as three parts, apply laws on exp itself, or on left expr or right expr. 
@@ -29,8 +33,4 @@ rewrites (eqn_l, eqn_r) (Var v) = [(Var v)]
 
 -- apply laws on on expr and get the new expr 
 helper :: Equation -> Expression -> [Expression]
--- helper (el, er) exp = [apply er subst | subst <- match el exp]
-
-helper (el, er) exp = apply er (match el exp)
-
-
+helper (el, er) exp = [apply er subst | subst <- Match.match el exp]
