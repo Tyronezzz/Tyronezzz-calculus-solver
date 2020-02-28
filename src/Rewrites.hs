@@ -29,7 +29,8 @@ rewrites (eqn_l, eqn_r) (Var v) = [(Var v)]
 
 -- apply laws on on expr and get the new expr 
 helper :: Equation -> Expression -> [Expression]
-helper (el, er) exp = [apply er subst | subst <- match el exp]
--- helper (el, er) exp = apply er (match el exp)
+-- helper (el, er) exp = [apply er subst | subst <- match el exp]
+
+helper (el, er) exp = apply er (match el exp)
 
 
