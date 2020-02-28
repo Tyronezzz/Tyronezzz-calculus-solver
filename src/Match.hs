@@ -1,4 +1,4 @@
-module Matchings (match)
+module Match (match)
 where
 import Expressions
 import Substitutions (Subst)
