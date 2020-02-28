@@ -42,7 +42,7 @@ instance Pretty Step where
     pretty (Step lName e) = 
         lbrace <> pretty lName <> rbrace <> line <> equals <> align (cat [lparen <> hang 2  ( pretty e), rparen]) <> line
                                         
- --print Calculation                                       
+--print Calculation                                       
 instance Pretty Calculation where
     pretty (Calc e ss) = align (lparen <>  ( pretty e ) <> rparen) <> line <> align (sep (map pretty ss))
                                       
