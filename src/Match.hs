@@ -18,6 +18,15 @@ match (BiExpr op_eqn eqn_left eqn_right) (BiExpr op e1 e2) | op == op_eqn = [(eq
 match (SinExpr op_eqn eqn) (SinExpr op e) | op == op_eqn = [(eqn, e)]
                                           | otherwise    = []
 
-match (Var eqn_v) (Var v) = [(Var eqn_v, Var v)]
+match (Var eqn_v) _ = [(Var eqn_v, Var v)]
 
 
+compatible :: [Subst] -> [Subst] -> Boolean
+compatible [] _ = false
+compatible _ [] = false
+
+compatible _ [[]] = true
+compatible [[]] _ = true
+
+-- [] -- not match
+-- [[]] -- const match
