@@ -12,7 +12,7 @@ data Expression = Con String | Var String | Derivative Expression Expression | S
 data Law = Law String Equation
 type Equation = (Expression, Expression)
 data Step = Step LawName Expression
-data Calculation = Calc Expr [Step] 
+data Calculation = Calc Expression [Step] 
 ```
 
 For calculation, we have binary operators like Add(+), Sub(-), Pow(^), etc. We also have unary operators like Sin, Cos, Ln, etc. For inputs with multiple operations like "2*x", we cannot ignore the *s. Otherwise, it will parse as "2x", a variable. 
@@ -57,7 +57,7 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
 
 
-
+Also did some work on pretty print. 
 
 
 
