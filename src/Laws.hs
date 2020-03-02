@@ -49,14 +49,30 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
         Law "mul" (Derivative (Var "x") (BiExpr Mul (Var "a") (Var "b")),BiExpr Add (BiExpr Mul (Derivative (Var "x") (Var "a")) (Var "b")) (BiExpr Mul (Var "a") (Derivative (Var "x") (Var "b")))),
 
+        Law "Sin" (Derivative (Var "x") (SinExpr Sin (Var "a")),(BiExpr Mul (SinExpr Cos (Var "a")) (Derivative (Var "x") (Var "a")))),
+
+        Law "Cos" (Derivative (Var "x") (SinExpr Cos (Var "a")),SinExpr Neg (BiExpr Mul (SinExpr Sin (Var "a")) (Derivative (Var "x") (Var "a")))),
+
         Law "ln" (Derivative (Var "x") (SinExpr Ln (Var "a")),BiExpr Mul (BiExpr Div (Con 1) (Var "a")) (Derivative (Var "x") (Var "a"))),
 
         Law "power" (Derivative (Var "x") (BiExpr Pow (Var "a") (Var "b")),BiExpr Mul (BiExpr Pow (Var "a") (Var "b")) (Derivative (Var "x") (BiExpr Mul (Var "b") (SinExpr Ln (Var "a"))))),
 
         Law "derivativeSelf" (Derivative (Var "x") (Var "x"),Con 1),
         
-        Law "ZeroMul" (BiExpr Mul (Var "x") (Con 0), Con 0),  -- var, anything???
-        Law "OneMul" (BiExpr Mul (Var "x") (Con 1), Var "x")
+        Law "ZeroMul" (BiExpr Mul (Var "x") (Con 0), Con 0),  
+        Law "OneMul" (BiExpr Mul (Var "x") (Con 1), Var "x"),
+        Law "ZeroMul.2" (BiExpr Mul (Con 0) (Var "x"), Con 0),
+        Law "OneMul.2" (BiExpr Mul (Con 1) (Var "x") , Var "x"),
+
+        Law "ZeroAdd" (BiExpr Add (Var "x") (Con 0), Var "x"), 
+        Law "ZeroAdd.2" (BiExpr Add (Con 0) (Var "x"), Var "x")
+
+        -- Law "ConAdd" (BiExpr Add (Con a) (Con b), Con (a+b))
+        -- Law "CommuniAdd" (BiExpr Add (Var "x") (Var "y"), BiExpr Add (Var "y") (Var "x")),
+        -- Law "CommuniMul" (BiExpr Mul (Var "x") (Var "y"), BiExpr Mul (Var "y") (Var "x"))
+
+-- (x, sin(a)) = cos(a)*(x, a)
+--(x, cos(a)) = -sin(a)*(x,a)
         -- change the order?
         -- simplify the result
         -- x*0 = 0

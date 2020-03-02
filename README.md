@@ -59,16 +59,18 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 
-## Problems
-
-deriv const law
-
-pretty print
+## Problems / To do
 
 parse input for para in calculate
 
-
 dz x^y
+
+simplify the result   ((x ^ 2) * (2 * (1 / x)))
+
+
+pretty print
+
+//deriv const law
 
 // space, seems fixed 
 

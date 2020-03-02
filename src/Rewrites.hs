@@ -23,9 +23,7 @@ rewrites :: Equation -> Expression -> [Expression]
 
 rewrites (eqn_l, eqn_r) (Derivative e1 (Con n)) = [Con 0] 
 
-
 rewrites (eqn_l, eqn_r) (Derivative e1 e2) = (helper (eqn_l, eqn_r) (Derivative e1 e2)) -- (helper (eqn_l, eqn_r) (Derivative e1 e2)) ++ [Derivative e1 a | a <- rewrites (eqn_l, eqn_r) e2]
-
 
 rewrites (eqn_l, eqn_r) (BiExpr op e1 e2) = (helper (eqn_l, eqn_r) (BiExpr op e1 e2)) ++ [BiExpr op a e2 | a <- rewrites (eqn_l, eqn_r) e1] ++ [BiExpr op e1 a | a <- rewrites (eqn_l, eqn_r) e2]
 
