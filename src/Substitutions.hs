@@ -18,8 +18,11 @@ apply (SinExpr op e1) subst  = if(binding subst (SinExpr op e1) /= Nothing ) the
                               else SinExpr op (if (binding subst e1) == Nothing then (apply e1 subst) else fromJust (binding subst e1))
 
 
+-- apply (Derivative e1 e2) subst = if(binding subst (Derivative e1 e2) /= Nothing) then fromJust (binding subst (Derivative e1 e2))
+--                                   else Derivative e1 (if (binding subst e2) == Nothing then (apply e2 subst) else fromJust (binding subst e2))
+
 apply (Derivative e1 e2) subst = if(binding subst (Derivative e1 e2) /= Nothing) then fromJust (binding subst (Derivative e1 e2))
-                                  else Derivative e1 (if (binding subst e2) == Nothing then (apply e2 subst) else fromJust (binding subst e2))
+                                   else Derivative (fromJust (binding subst e1)) (if (binding subst e2) == Nothing then (apply e2 subst) else fromJust (binding subst e2))
 
 apply (Con num) subst = if (binding subst (Con num)) /= Nothing then fromJust (binding subst (Con num))
                         else Con num

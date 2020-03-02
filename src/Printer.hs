@@ -40,10 +40,10 @@ instance Pretty BinaryOp where
 --print Step
 instance Pretty Step where
     pretty (Step lName e) = 
-        lbrace <> pretty lName <> rbrace <> line <> equals <> align (cat [lparen <> hang 2  ( pretty e), rparen]) <> line
+        lbrace <> pretty lName <> rbrace <> line <> equals <> align (cat [ hang 2  ( pretty e)]) <> line
                                         
 --print Calculation                                       
 instance Pretty Calculation where
-    pretty (Calc e ss) = align (lparen <>  ( pretty e ) <> rparen) <> line <> align (sep (map pretty ss))
+    pretty (Calc e ss) = align ( ( pretty e )) <> line <> align (sep (map pretty ss))
                                       
 
