@@ -11,6 +11,8 @@ import Substitutions (Subst)
 -- [[]]
 -- []
 
+-- Match.match (Derivative (Var "x") (SinExpr Sin (Var "a")))  (Derivative (Var "q") (SinExpr Sin (Var "q"))))
+
 match :: Expression -> Expression -> [Subst]
 
 -- match (Derivative s1 eqn) (Derivative s2 e) = match eqn e
