@@ -31,14 +31,6 @@ data Expression = Con Int
                   | BiExpr BinaryOp Expression Expression deriving (Show, Eq)
 
 
--- instance Show Expression where
---      showsPrec p (Var v) = showString v
---      showsPrec p (Con c) = showInt c --showsPrec p a
---      showsPrec p (SinExpr op e) = 
---      showsPrec p (BinaryOp op e1 e2) = 
---      showsPrec p (Derivative e1 e2) = 
-
-
 ch :: Parser Char
 ch = do {c <- satisfy (isAlpha); return c}
 
@@ -122,9 +114,6 @@ parserExpressionHelper = space *> (try (parserBiExpr)
 
 
 -- another version of parsing in book
--- brackets explicitly
--- space??
-
 
 addOp :: ParsecT Void String Identity BinaryOp
 addOp = space *> ((string "+" *> return Add)
@@ -145,42 +134,42 @@ expr = space *> (term >>= rest)
 rest :: Expression -> ParsecT Void String Identity Expression
 rest e1 = space *> do {
                        p <- addOp;
-                       e2 <- term;
+                       e2 <- space *> term;
                        rest (BiExpr p e1 e2)}
           <|> return e1
 
 term :: ParsecT Void String Identity Expression
-term = space *>  (factor2 >>= more)
+term = space *>  (factor2 <* space >>= more)
 
 more :: Expression -> ParsecT Void String Identity Expression
 more e1 = space *> do {
                        p <- mulOp;
-                       e2 <- factor2;
+                       e2 <- space *> factor2;
                        more (BiExpr p e1 e2)}
           <|> return e1
 
 factor2 :: ParsecT Void String Identity Expression
-factor2 = space *> (factor >>= powexpr)
+factor2 = space *> (factor <* space >>= powexpr)
 
 powexpr :: Expression -> ParsecT Void String Identity Expression
 powexpr e1 = space *> do {
                        p <- powOp;
-                       e2 <- factor;
+                       e2 <- space *>  factor;
                        more (BiExpr p e1 e2)}
           <|> return e1
 
 factor :: ParsecT Void String Identity Expression
-factor = space *>  (try parserSinExpr <|> try oneDeriv <|> try ( string "(" *> expr <*space <* string ")"))
+factor = space *>  (try parserSinExpr <|> try oneDeriv <|> try ( string "(" *> space *> expr <*space <* string ")"))
 
 
 parserSinExpr :: Parser Expression
 parserSinExpr = space *> try(do{  
                                    operator <- parserUnaryOp;
-                                   expression <- expr;  -- parserVar??
+                                   expression <- space *> expr;  -- parserVar??
                                    return (SinExpr operator expression)})
                     <|>try (do{
                               operator <- parserUnaryOp;
-                              expression <- expr;
+                              expression <- space *> expr;
                               return (SinExpr operator expression)})
                     <|> try parserCon
                     <|> try parserVar

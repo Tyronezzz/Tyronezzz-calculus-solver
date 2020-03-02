@@ -58,7 +58,5 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
         -- Law "derivativeCon" (Derivative (Var "x") (Con _),Con 0)
         ]
 
-
-
 -- constants: (x, c) = 0 if c does not depend on x
 
