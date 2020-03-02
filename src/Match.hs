@@ -33,8 +33,6 @@ match _ _ = []
 compatible :: Subst -> Subst -> Bool
 compatible [] _ = True
 compatible _ [] = True
-
-
 compatible [(lf_e1, rt_e1)] [(lf_e2, rt_e2)] = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
 
 

@@ -60,9 +60,8 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 ## Problems
-space 
 
-deriv const
+deriv const law
 
 pretty print
 
@@ -71,6 +70,7 @@ parse input for para in calculate
 
 dz x^y
 
+// space, seems fixed 
 
 
 
