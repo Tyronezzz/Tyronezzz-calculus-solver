@@ -54,10 +54,30 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 ## Reason with configurable rules
 
-Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
 
 
-Also did some work on pretty print. 
+
+
+
+## Problems
+
+deriv const law
+
+pretty print
+
+parse input for para in calculate
+
+
+dz x^y
+
+// space, seems fixed 
+
+
+
+<!-- Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
+
+
+Also did some work on pretty print.  -->
 
 
 

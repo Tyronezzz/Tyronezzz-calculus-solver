@@ -55,9 +55,16 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
         Law "derivativeSelf" (Derivative (Var "x") (Var "x"),Con 1),
         
-        Law "derivativeCon" (Derivative (Var "x") (Con _),Con 0)]
+        Law "ZeroMul" (BiExpr Mul (Var "x") (Con 0), Con 0),  -- var, anything???
+        Law "OneMul" (BiExpr Mul (Var "x") (Con 1), Var "x")
+        -- change the order?
+        -- simplify the result
+        -- x*0 = 0
+        -- x*1 = 1
+        -- x-x = 0  ax + bx = (a+b)x ??
 
-
+        -- Law "derivativeCon" (Derivative (Var "x") (Con _),Con 0)
+        ]
 
 -- constants: (x, c) = 0 if c does not depend on x
 
