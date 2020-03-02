@@ -13,7 +13,8 @@ import Substitutions (Subst)
 
 match :: Expression -> Expression -> [Subst]
 
-match (Derivative s1 eqn) (Derivative s2 e) = match eqn e
+-- match (Derivative s1 eqn) (Derivative s2 e) = match eqn e
+match (Derivative s1 eqn) (Derivative s2 e) =  [ a++b |a <- match s1 s2, b <- match eqn e, compatible a b]
 
 match (BiExpr op_eqn eqn_left eqn_right) (BiExpr op e1 e2) | op == op_eqn
   = if match eqn_left e1 == [] ||  match eqn_right e2 == [] then []
@@ -33,7 +34,8 @@ match (Con n1) (Con n2)
 
 match _ _ = [] 
 
-
+-- law
+-- matchAll v 
 
 compatible :: Subst -> Subst -> Bool
 compatible [] _ = True

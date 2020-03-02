@@ -17,8 +17,13 @@ i1 = Derivative (Var "x") (BiExpr Mul (Var "x") (Con 2))
 i2 = Derivative (Var "x") (BiExpr Sub (BiExpr Mul (Con 2) (Var "x")) (BiExpr Pow (Var "x") (Con 3)))
 i3 = Derivative (Var "z") (BiExpr Pow (Var "x") (Var "y"))
 i4 = Derivative (Var "x") (SinExpr Sin (BiExpr Pow (Var "x") (Con 2)))
+i5 = Derivative (Var "z") (BiExpr Pow (Var "x") (Var "y"))
+i6 = Derivative (Var "x") (SinExpr Sin (Var "y"))
 -- (x, 2*x - x^3)
 -- e.g. calculate laws i2
+
+-- Match.match (Derivative (Var "x") (SinExpr Sin (Var "x"))) (Derivative (Var "x") (SinExpr Sin (Var "y")))
+
 
 calculate :: [Law] -> Expression -> Calculation
 calculate laws e = Calc e (manyStep rws e)
