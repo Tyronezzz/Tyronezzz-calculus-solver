@@ -55,6 +55,9 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
         Law "derivativeSelf" (Derivative (Var "x") (Var "x"),Con 1),
         
+        Laws "CommuniAdd" (BiExpr Add (Var "x") (Var "y"), BiExpr Add (Var "y") (Var "x")),
+        Laws "CommuniMul" (BiExpr Mul (Var "x") (Var "y"), BiExpr Mul (Var "y") (Var "x")),
+
         Law "ZeroMul" (BiExpr Mul (Var "x") (Con 0), Con 0),  -- var, anything???
         Law "OneMul" (BiExpr Mul (Var "x") (Con 1), Var "x")
         -- change the order?

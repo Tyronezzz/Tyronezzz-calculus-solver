@@ -24,6 +24,7 @@ match (SinExpr op_eqn eqn) (SinExpr op e) | op == op_eqn = match eqn e
                                           | otherwise    = []
 
 match (Var v) e = [[(Var v, e )]]
+match (Con 0) (Con n2) = []
 match (Con n1) (Con n2) = [[]]
 
 match _ _ = [] 
