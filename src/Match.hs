@@ -37,11 +37,30 @@ match _ _ = []
 -- law
 -- matchAll v 
 
+-- compatible :: Subst -> Subst -> Bool
+-- compatible [] _ = True
+-- compatible _ [] = True
+-- compatible [(lf_e1, rt_e1)] [(lf_e2, rt_e2)] = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
+
+-- compatible subst1 subst2 = zipWith compatibleHelper (x:xs) (y:ys)
+
 compatible :: Subst -> Subst -> Bool
 compatible [] _ = True
 compatible _ [] = True
-compatible [(lf_e1, rt_e1)] [(lf_e2, rt_e2)] = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
+compatible subst1 subst2 = anyFalse boolList
+                                where boolList = compatibleHelper subst1 subst2
+
+compatibleHelper :: Subst -> Subst -> [Bool]
+compatibleHelper subst1 subst2 = [compatibleInside subst1_ele subst2_ele | subst1_ele <- subst1, subst2_ele <- subst2]
 
 
+compatibleInside :: (Eq a) => (a, a) -> (a, a) -> Bool
+-- compatibleInside [] _ = True
+-- compatibleInside _ [] = True
+compatibleInside (lf_e1, rt_e1) (lf_e2, rt_e2) = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
+
+anyFalse :: [Bool] -> Bool
+anyFalse [] = True
+anyFalse (x:xs) = if x /= True then False else anyFalse xs
 -- [] -- not match
 -- [[]] -- const match
