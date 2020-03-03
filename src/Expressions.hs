@@ -1,8 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
 module Expressions where
---     ( someFunc
---     ) 
 
 
 import Data.Char
@@ -18,8 +16,9 @@ type Parser = ParsecT Void String Identity
 data Law = Law String Equation deriving Show
 type Equation = (Expression, Expression)
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+-- someFunc :: IO ()
+-- someFunc = putStrLn "someFunc"
+
 
 
 data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving (Show, Eq)

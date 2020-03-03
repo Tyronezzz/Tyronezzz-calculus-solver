@@ -2,9 +2,20 @@ module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
 import Data.Text.Prettyprint.Doc.Render.String as Render
+import Text.Megaparsec
+import Text.Megaparsec.Char
 import Expressions
 import Laws
 import Calculations
+
+
+
+showResult str = case parse expr "" str of
+                    Left bundle -> putStr (errorBundlePretty bundle)
+                    Right a -> print (pretty (calculate laws a))
+
+
+
 
 --  print Expression
 instance Pretty Expression where
@@ -46,4 +57,3 @@ instance Pretty Step where
 instance Pretty Calculation where
     pretty (Calc e ss) = align ( ( pretty e )) <> line <> align (sep (map pretty ss))
                                       
-

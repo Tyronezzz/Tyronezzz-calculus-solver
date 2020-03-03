@@ -57,22 +57,31 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 
+## Run the program
+First run the program using
+```
+stck run
+```
+
+Then input your question, for example, (x, 2*x). Press the enter and then you can get the steps.
+
 
 
 ## Problems / To do
-
-parse input for para in calculate
 
 pretty print
 
 
 bonus point: simplify the result   ((x ^ 2) * (2 * (1 / x)))
 
+
 //dz x^y
 
 //deriv const law
 
 // space, seems fixed 
+
+parse input for para in calculate
 
 compatible for multi-variables
 
