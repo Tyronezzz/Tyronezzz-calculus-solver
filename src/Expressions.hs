@@ -2,25 +2,18 @@
 
 module Expressions where
 
-
 import Data.Char
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Data.Void(Void)
 import Data.Functor.Identity (Identity)
 
-type Parser = ParsecT Void String Identity
 
+type Parser = ParsecT Void String Identity
 
 
 data Law = Law String Equation deriving Show
 type Equation = (Expression, Expression)
-
--- someFunc :: IO ()
--- someFunc = putStrLn "someFunc"
-
-
-
 data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving (Show, Eq)
 data BinaryOp = Add | Sub | Mul | Div | Pow | Log deriving (Show, Eq)
 data Expression = Con Int 
@@ -69,45 +62,6 @@ parserBinaryOp = space *> ((string "+" *> return Add)
      <|> (string "/" *> return Div)
      <|> (string "^" *> return Pow)
      <|> (string "log" *> return Log))
-
-
-parserDerivative :: Parser Expression
-parserDerivative = do 
-                  space
-                  vari <- parserVar
-                  string ","
-                  space
-                  expression <- parserExpression
-                  return (Derivative vari expression)
-
-
-parserSingleExpr :: Parser Expression
-parserSingleExpr = do 
-                  space
-                  operator <- parserUnaryOp
-                  expression <- parserExpression
-                  return (SinExpr operator expression)
-
-parserBiExpr :: Parser Expression
-parserBiExpr = do 
-               space
-               expression1 <- parserExpression
-               operator <- parserBinaryOp
-               expression2 <- parserExpression
-               return (BiExpr operator expression1 expression2)
-
-
-
-parserExpression :: Parser Expression
-parserExpression = space *> (parserCon
-                              <|> parserVar
-                              <|> (char '(' *> parserExpressionHelper <* char ')'))
-               
-parserExpressionHelper :: Parser Expression
-parserExpressionHelper = space *> (try (parserBiExpr) 
-                  <|> try (parserDerivative)
-                  <|> try (parserSingleExpr))
-
 
 
 -- another version of parsing in book
@@ -179,3 +133,41 @@ oneDeriv =  do{
                expression <- space *> expr;
                _ <- string ")";
                return (Derivative vari expression);}                        
+
+
+-- parserDerivative :: Parser Expression
+-- parserDerivative = do 
+--                   space
+--                   vari <- parserVar
+--                   string ","
+--                   space
+--                   expression <- parserExpression
+--                   return (Derivative vari expression)
+
+
+-- parserSingleExpr :: Parser Expression
+-- parserSingleExpr = do 
+--                   space
+--                   operator <- parserUnaryOp
+--                   expression <- parserExpression
+--                   return (SinExpr operator expression)
+
+-- parserBiExpr :: Parser Expression
+-- parserBiExpr = do 
+--                space
+--                expression1 <- parserExpression
+--                operator <- parserBinaryOp
+--                expression2 <- parserExpression
+--                return (BiExpr operator expression1 expression2)
+
+
+
+-- parserExpression :: Parser Expression
+-- parserExpression = space *> (parserCon
+--                               <|> parserVar
+--                               <|> (char '(' *> parserExpressionHelper <* char ')'))
+               
+-- parserExpressionHelper :: Parser Expression
+-- parserExpressionHelper = space *> (try (parserBiExpr) 
+--                   <|> try (parserDerivative)
+--                   <|> try (parserSingleExpr))

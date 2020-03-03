@@ -1,12 +1,13 @@
+{-# OPTIONS_GHC -Wall #-}
 module Laws where
 
-import Data.Char
+-- import Data.Char
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Data.Void(Void)
 import Data.Functor.Identity (Identity)
 import Expressions
-import Data.List (partition)
+-- import Data.List (partition)
 
 
 
@@ -17,6 +18,7 @@ parserLaw = do{
                 eq <- space *> parserEquation;
                 return (Law lawName eq)}
 
+parserEquation :: ParsecT Void String Identity (Expression, Expression)
 parserEquation = do{
                     exp1 <- space *> expr;
                     _ <- space *> char '=';
@@ -27,22 +29,8 @@ parserEquation = do{
 sortLaws :: [Law] -> Expression -> [Law]
 sortLaws laws expr = laws
 
--- sortLaws laws = simple ++ others ++ defns
---      where
---      (simple, nonsimple) = partition isSimple laws
---      (defns, others)     = partition isDefn nonsimple
 
--- partition p xs = (filter p xs, filter (not . p) xs)
-
-
--- laws = ["addition : (x, a+b)=(x, a)+(x, b)",
---         "rule : (x, a*b)=(x, a)*b+a*(x, b)",
---         "sin : (x, sin(a))=cos(a)*(x, a)",
---         "cos : (x, cos(a))=-sin(a)*(x, a)", 
---         "ln : (x, ln(a))=(1/a)*(x, a)",
---         "power : (x, a^b)=a^b * (x, b*ln(a))", 
---         "derivative_self : (x, x)=1"]
-
+laws :: [Law]
 laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),BiExpr Add (Derivative (Var "x") (Var "a")) (Derivative (Var "x") (Var "b"))),
 
         Law "minus" (Derivative (Var "x") (BiExpr Sub (Var "a") (Var "b")),BiExpr Sub (Derivative (Var "x") (Var "a")) (Derivative (Var "x") (Var "b"))),
@@ -87,3 +75,11 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
 -- constants: (x, c) = 0 if c does not depend on x
 
+
+-- laws = ["addition : (x, a+b)=(x, a)+(x, b)",
+--         "rule : (x, a*b)=(x, a)*b+a*(x, b)",
+--         "sin : (x, sin(a))=cos(a)*(x, a)",
+--         "cos : (x, cos(a))=-sin(a)*(x, a)", 
+--         "ln : (x, ln(a))=(1/a)*(x, a)",
+--         "power : (x, a^b)=a^b * (x, b*ln(a))", 
+--         "derivative_self : (x, x)=1"]

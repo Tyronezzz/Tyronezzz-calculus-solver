@@ -53,14 +53,15 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 ## Reason with configurable rules
-
+<!-- to do: explain the ideas  -->
+Based on our data type, we build the 
 
 
 
 ## Run the program
 First run the program using
 ```
-stck run
+stack run
 ```
 
 Then input your question, for example, (x, 2*x). Press the enter and then you can get the steps.
@@ -71,6 +72,7 @@ Then input your question, for example, (x, 2*x). Press the enter and then you ca
 
 pretty print
 
+configurable rules
 
 bonus point: simplify the result   ((x ^ 2) * (2 * (1 / x)))
 

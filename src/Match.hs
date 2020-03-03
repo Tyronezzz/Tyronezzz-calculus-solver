@@ -36,8 +36,6 @@ match (Con n1) (Con n2)
 
 match _ _ = [] 
 
--- law
--- matchAll v 
 
 -- compatible :: Subst -> Subst -> Bool
 -- compatible [] _ = True
