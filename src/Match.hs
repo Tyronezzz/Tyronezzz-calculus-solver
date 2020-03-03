@@ -4,7 +4,6 @@ import Expressions
 import Substitutions (Subst)
 
 
-
 -- if law and expr are match, they must have same op
 -- law:   x + 4
 -- input: 3 + 4

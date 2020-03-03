@@ -39,7 +39,7 @@ laws = [Law "addition" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Bi
 
         Law "Sin" (Derivative (Var "x") (SinExpr Sin (Var "a")),(BiExpr Mul (SinExpr Cos (Var "a")) (Derivative (Var "x") (Var "a")))),
 
-        Law "Cos" (Derivative (Var "x") (SinExpr Cos (Var "a")),SinExpr Neg (BiExpr Mul (SinExpr Sin (Var "a")) (Derivative (Var "x") (Var "a")))),
+        Law "Cos" (Derivative (Var "x") (SinExpr Cos (Var "a")), (BiExpr Mul (SinExpr Neg (SinExpr Sin (Var "a"))) (Derivative (Var "x") (Var "a")))),
 
         Law "ln" (Derivative (Var "x") (SinExpr Ln (Var "a")),BiExpr Mul (BiExpr Div (Con 1) (Var "a")) (Derivative (Var "x") (Var "a"))),
 

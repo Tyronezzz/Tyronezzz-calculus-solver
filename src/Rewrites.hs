@@ -16,9 +16,6 @@ import Match
 -- of e against the left-hand expression of (eqn_l, eqn_r) and replacing the subexpression with the
 --  appropriate instance of the right-hand expression of (eqn_l, eqn_r).
 
--- input = Derivative (Var "x") (BiExpr Add (Var "a") (Var "b"))
--- eqn = (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Derivative (Var "x") (BiExpr Add (Var "b") (Var "a")))
-
 
 -- For Binary expr,  we can consider rewrites as three parts, apply laws on exp itself, or on left expr or right expr. 
 rewrites :: Equation -> Expression -> [Expression]
@@ -41,11 +38,10 @@ helper (el, er) exp = [apply er subst | subst <- Match.match el exp]
 
 -- equation :: (Expression, Expression)
 -- equation = (law_left, law_right)
-
 -- law_left :: Expression
 -- law_left =  BiExpr Add (Var "x") (Var "y")
-
-
 -- law_right = BiExpr Add (Var "y") (Var "x")
-
 -- e1 = BiExpr Add (Con 2) (Con 3)
+
+-- input = Derivative (Var "x") (BiExpr Add (Var "a") (Var "b"))
+-- eqn = (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),Derivative (Var "x") (BiExpr Add (Var "b") (Var "a")))

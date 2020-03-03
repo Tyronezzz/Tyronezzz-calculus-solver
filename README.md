@@ -65,7 +65,7 @@ stack run
 ```
 
 Then input your question, for example, (x, 2*x). Press the enter and then you can get the steps.
-
+Be careful, you cannot use key left, key right. You can only solve one problem in this program.
 
 
 ## Problems / To do
@@ -74,18 +74,38 @@ pretty print
 
 configurable rules
 
-bonus point: simplify the result   ((x ^ 2) * (2 * (1 / x)))
+simplify the result   ((x ^ 2) * (2 * (1 / x)))
 
 
-//dz x^y
 
-//deriv const law
 
-// space, seems fixed 
+## Bugs fixed
+dz x^y
+
+deriv const law
+
+space, seems fixed 
 
 parse input for para in calculate
 
 compatible for multi-variables
+
+
+
+
+
+
+-----
+
+comments
+tests??
+
+readme
+- structure, explain
+- how to run
+- improved parts
+
+
 
 
 <!-- Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
