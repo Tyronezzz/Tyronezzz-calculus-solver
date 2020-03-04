@@ -64,8 +64,6 @@ parserBinaryOp = space *> ((string "+" *> return Add)
      <|> (string "log" *> return Log))
 
 
--- another version of parsing in book
-
 addOp :: ParsecT Void String Identity BinaryOp
 addOp = space *> ((string "+" *> return Add)
      <|> (string "-" *> return Sub))

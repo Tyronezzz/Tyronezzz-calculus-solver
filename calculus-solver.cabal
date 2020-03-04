@@ -42,6 +42,7 @@ library
       base >=4.7 && <5
       ,megaparsec > 5.0.0 && < 9
       ,prettyprinter >=1.2.1.1 
+      ,pandoc >= 2.0
   default-language: Haskell2010
 
 executable calculus-solver-exe
@@ -67,4 +68,6 @@ test-suite calculus-solver-test
   build-depends:
       base >=4.7 && <5
     , calculus-solver
+    , tasty
+    , tasty-hunit
   default-language: Haskell2010

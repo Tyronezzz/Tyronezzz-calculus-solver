@@ -10,10 +10,9 @@ import Substitutions (Subst)
 -- [] -- not match
 -- [[]] -- const match
 
-
+-- match the left hand side of law with the expression, if so, return a Subst
 match :: Expression -> Expression -> [Subst]
 
--- match (Derivative s1 eqn) (Derivative s2 e) = match eqn e
 match (Derivative s1 eqn) (Derivative s2 e) =  [ a++b |a <- match s1 s2, b <- match eqn e, compatible a b]
 
 match (BiExpr op_eqn eqn_left eqn_right) (BiExpr op e1 e2) | op == op_eqn
@@ -25,12 +24,12 @@ match (SinExpr op_eqn eqn) (SinExpr op e) | op == op_eqn = match eqn e
                                           | otherwise    = []
 
 match (Var v) e = [[(Var v, e )]]
+
 match (Con n1) (Con n2) 
     | n1 == n2 = [[]]
     | n1 == 0 && n2 /= 0 = []
     | n1 == 1 && n2 /= 1 = []
     | otherwise = []
-
 
 match _ _ = [] 
 
@@ -40,7 +39,7 @@ match _ _ = []
 -- compatible _ [] = True
 -- compatible [(lf_e1, rt_e1)] [(lf_e2, rt_e2)] = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
 
--- compatible subst1 subst2 = zipWith compatibleHelper (x:xs) (y:ys)
+
 
 compatible :: Subst -> Subst -> Bool
 compatible [] _ = True

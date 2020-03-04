@@ -1,7 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 module Laws where
 
--- import Data.Char
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Data.Void(Void)

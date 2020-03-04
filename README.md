@@ -1,5 +1,8 @@
 # calculus-solver
 
+This project is used for solving derivitive problems.
+
+
 ## Design the structure
 Based on our data type, we build the program with some modules. 
 - Expressions: parse the input string and output the Expression type.
@@ -48,9 +51,7 @@ First run the program using
 stack run
 ```
 
-Then input your question, for example, (x, 2*x). Press the enter and then you can get the steps.
-Be careful, you cannot use key left, key right. You can only solve one problem in this program.
-
+Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
 *For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
 
 
@@ -65,7 +66,15 @@ how??
 
 - configurable rules: How can we decide the order of the rules?
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-- space, seems fixed ??
+
+
+
+
+
+
+- tests
+- readme
+
 
 
 
@@ -75,7 +84,7 @@ how??
 - parse input for para in calculate
 - compatible for multi-variables
 - pretty print
-
+- spaces
 
 
 <!-- comments
