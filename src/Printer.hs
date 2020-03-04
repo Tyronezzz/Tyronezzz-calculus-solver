@@ -19,14 +19,30 @@ showResult str = case parse expr "" str of
 
 --  print Expression
 instance Pretty Expression where
-    pretty (Con num) = pretty num
-    pretty (Var s) = pretty s
-    pretty (Derivative v e) = flatAlt (align (cat [lparen <> hang 2 ( pretty v <> comma <> softline <> align ( pretty e)), rparen]))
-                                        (cat [lparen <> nest 2 (pretty v <> comma <> softline <> align ( pretty e)), rparen])
-    pretty (SinExpr uOp e) = flatAlt (align (cat [lparen <> hang 2 ( pretty uOp <> softline <> align ( pretty e)), rparen]))
-                                        (cat [lparen <> nest 2 (pretty uOp  <> softline <> align ( pretty e)), rparen])
-    pretty (BiExpr biOp e1 e2) = flatAlt (align (cat [lparen <> hang 2 ( pretty e1 <> softline <> align ( pretty biOp) <> softline <> align ( pretty e2)), rparen]))
-                                        (cat [lparen <> nest 2 (pretty e1  <> softline <> align ( pretty biOp) <> softline <> align ( pretty e2)), rparen])
+    -- pretty (Con num) = flatAlt ( (cat [lparen <> (pretty num), rparen]))
+    --                                     (cat [lparen <> (pretty num), rparen])
+    -- pretty (Var s) = flatAlt ( (cat [lparen <>  (pretty s), rparen]))
+    --                                     (cat [lparen <> (pretty s), rparen])
+
+    -- pretty (Derivative v e) = flatAlt ( (cat [lparen <> ( pretty v <> comma <> softline <>  ( pretty e)), rparen]))
+    --                                     (cat [lparen <> (pretty v <> comma <> softline <>  ( pretty e)), rparen])
+    -- pretty (SinExpr uOp e) = flatAlt ( (cat [lparen <>  ( pretty uOp <> softline <>  ( pretty e)), rparen]))
+    --                                     (cat [lparen <>  (pretty uOp  <> softline <>  ( pretty e)), rparen])
+    -- -- pretty (SinExpr uOp e) = lparen <> pretty uOp <> pretty e <> rparen
+    -- pretty (BiExpr biOp e1 e2) = flatAlt ( (cat [lparen <>  ( pretty e1 <> softline <>  ( pretty biOp) <> softline <>  ( pretty e2)), rparen]))
+    --                                     (cat [lparen <> (pretty e1  <> softline <>  ( pretty biOp) <> softline <>  ( pretty e2)), rparen])
+    pretty (Con num) = flatAlt ( ( lparen <> (pretty num) <> rparen))
+                                        ( lparen <> (pretty num)<>rparen)
+    pretty (Var s) = flatAlt ( ( lparen <>  (pretty s)<> rparen))
+                                        ( lparen <> (pretty s)<> rparen)
+
+    pretty (Derivative v e) = flatAlt ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
+                                        ( lparen <> (pretty v <> comma  <>  ( pretty e))<> rparen)
+    pretty (SinExpr uOp e) = flatAlt ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
+                                        ( lparen <>  (pretty uOp   <>  ( pretty e)) <> rparen)
+    -- pretty (SinExpr uOp e) = lparen <> pretty uOp <> pretty e <> rparen
+    pretty (BiExpr biOp e1 e2) = flatAlt ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
+                                        (  lparen <> (pretty e1   <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen)
 
 
 --  print Unary operator
@@ -51,9 +67,10 @@ instance Pretty BinaryOp where
 --print Step
 instance Pretty Step where
     pretty (Step lName e) = 
-        lbrace <> pretty lName <> rbrace <> line <> equals <> align (cat [ hang 2  ( pretty e)]) <> line
-                                        
+        lbrace <> pretty lName <> rbrace <> line  <> equals <>  (  ( pretty e)) <> line
+
+
 --print Calculation                                       
 instance Pretty Calculation where
-    pretty (Calc e ss) = align ( ( pretty e )) <> line <> align (sep (map pretty ss))
+    pretty (Calc e ss) = ( ( pretty e )) <> line <>  (sep (map pretty ss))
                                       
