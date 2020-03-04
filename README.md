@@ -3,13 +3,13 @@
 
 ## Design the structure
 Based on our data type, we build the program with some modules. 
--- Expressions: parse the input string and output the Expression type.
--- Laws: 
--- Match: Match the current expression with the left hand side equation. If they are match, return a substitution list. 
--- Printer: Print the data types.
--- Substitutions: Substitude the right hand side equation with the pairs in Subst.
--- Rewrites: Match the expression with the equation then get the new expression according to the law.
--- Calculations: Do the calculations and get many steps of the derivition. 
+- Expressions: parse the input string and output the Expression type.
+- Laws: 
+- Match: Match the current expression with the left hand side equation. If they are match, return a substitution list. 
+- Printer: Print the data types.
+- Substitutions: Substitude the right hand side equation with the pairs in Subst.
+- Rewrites: Match the expression with the equation then get the new expression according to the law.
+- Calculations: Do the calculations and get many steps of the derivition. 
 
 
 ### Data structures
