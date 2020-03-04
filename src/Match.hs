@@ -7,10 +7,9 @@ import Substitutions (Subst)
 -- if law and expr are match, they must have same op
 -- law:   x + 4
 -- input: 3 + 4
--- [[]]
--- []
+-- [] -- not match
+-- [[]] -- const match
 
--- Match.match (Derivative (Var "x") (SinExpr Sin (Var "a")))  (Derivative (Var "q") (SinExpr Sin (Var "q"))))
 
 match :: Expression -> Expression -> [Subst]
 
@@ -61,5 +60,3 @@ compatibleInside (lf_e1, rt_e1) (lf_e2, rt_e2) = if lf_e1 /= lf_e2 then True els
 anyFalse :: [Bool] -> Bool
 anyFalse [] = True
 anyFalse (x:xs) = if x /= True then False else anyFalse xs
--- [] -- not match
--- [[]] -- const match
