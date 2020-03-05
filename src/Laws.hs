@@ -1,4 +1,3 @@
-{-# OPTIONS_GHC -Wall #-}
 module Laws where
 
 import Text.Megaparsec
@@ -54,7 +53,6 @@ laws = [Law "Add" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),BiExpr 
         Law "ZeroAdd" (BiExpr Add (Var "x") (Con 0), Var "x"), 
         Law "ZeroAdd.2" (BiExpr Add (Con 0) (Var "x"), Var "x")
         ]
-
 
 -- laws = ["addition : (x, a+b)=(x, a)+(x, b)",
 --         "rule : (x, a*b)=(x, a)*b+a*(x, b)",

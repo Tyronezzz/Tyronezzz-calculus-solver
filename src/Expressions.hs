@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wall #-}
-
 module Expressions where
 
 import Data.Char

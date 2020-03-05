@@ -46,7 +46,7 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 ## Run the program
-First run the program using
+To run the program using
 ```
 stack run
 ```
@@ -55,10 +55,11 @@ Then input your question, for example, (x, x^2), for the derivative of x^2 to x.
 *For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
 
 
-
-<!-- ## Reason with configurable rules
-to do: explain the ideas  
-how?? -->
+## Test the program
+To test the program using
+```
+stack test
+```
 
 
 
@@ -80,7 +81,9 @@ how?? -->
 
 
 <!-- comments -->
-
+<!-- ## Reason with configurable rules
+to do: explain the ideas  
+how?? -->
 
 
 
