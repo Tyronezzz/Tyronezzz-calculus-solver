@@ -1,12 +1,12 @@
 # calculus-solver
 
-This project is used for solving derivitive problems.
+This project is used for solving derivitive problems. Now, it supports +, -, *, /, ^, sin, cos, ln operators.
 
 
 ## Design the structure
 Based on our data type, we build the program with some modules. 
 - Expressions: parse the input string and output the Expression type.
-- Laws: 
+- Laws: Give the derivitive laws.
 - Match: Match the current expression with the left hand side equation. If they are match, return a substitution list. 
 - Printer: Print the data types.
 - Substitutions: Substitude the right hand side equation with the pairs in Subst.
@@ -56,9 +56,9 @@ Then input your question, for example, (x, x^2), for the derivative of x^2 to x.
 
 
 
-## Reason with configurable rules
-<!-- to do: explain the ideas  -->
-how??
+<!-- ## Reason with configurable rules
+to do: explain the ideas  
+how?? -->
 
 
 
@@ -66,14 +66,6 @@ how??
 
 - configurable rules: How can we decide the order of the rules?
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-
-
-
-
-
-
-- tests
-- readme
 
 
 
@@ -87,13 +79,7 @@ how??
 - spaces
 
 
-<!-- comments
-tests??
-
-readme
-- structure, explain
-- how to run
-- improved parts -->
+<!-- comments -->
 
 
 
