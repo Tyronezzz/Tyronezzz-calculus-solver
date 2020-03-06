@@ -8,7 +8,7 @@ import Data.Functor.Identity (Identity)
 import Expressions
 import Rewrites
 import Laws 
-
+--data structures for Calculation
 data Step = Step LawName Expression deriving Show
 data Calculation = Calc Expression [Step]  deriving Show
 type LawName = String

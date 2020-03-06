@@ -26,7 +26,7 @@ parserEquation = do{
 sortLaws :: [Law] -> Expression -> [Law]
 sortLaws laws expr = laws
 
-
+-- all the laws
 laws :: [Law]
 laws = [Law "Add" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),BiExpr Add (Derivative (Var "x") (Var "a")) (Derivative (Var "x") (Var "b"))),
 

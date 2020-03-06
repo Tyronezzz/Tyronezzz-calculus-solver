@@ -24,7 +24,7 @@ showResult str = case parse expr "" str of
                                     generatePdf (pretty (calculate laws a));
                     }
 
-resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "Calculus Solver" )))))
+resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "A Haskell Calculus Solver!" )))))
            <> para ((text ( ( Render.renderStrict (layoutPretty defaultLayoutOptions pc ))) ) )
 
 
@@ -36,7 +36,7 @@ generatePdf pc = do
 
 -- ggFunc pc = do
 --     temp <- readFile "template.tex"
---     let pdf_file = writeLaTeX (def {  writerTemplate = temp}) letter
+--     let pdf_file = writeLaTeX (def {  writerStandalone = True, writerTemplate = temp}) letter
 --     docx <- runIO (writeDocx def letter) >>= handleError
 --     BL.writeFile "letter.docx" docx
 

@@ -64,42 +64,6 @@ We are using the following laws. The first 9 laws are used to do the derivitive 
 
 
 
-### Special feature
-In this project, we focused on generating a word file. 
-
-
-TO DO!
-
-
-
-
-
-
-
-
-## Run the program
-To run the program using
-```
-stack run
-```
-
-Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
-*For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
-
-
-## Test the program
-To test the program using
-```
-stack test
-```
-
-
-
-## Problems / To do
-
-- simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-
-
 
 
 ## Bugs fixed
@@ -140,10 +104,10 @@ Also, we wrote a parser that could parse our problems. For example:
 ```haskell
 Input: parseTest parserExpression "(x, ((3 log x) + 6))"
 Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
-``` -->
+​``` -->
 <!-- ## Example for Expression
 
-```haskell
+​```haskell
 Input: "x * sin(x)"
 After parsing: "BiExpr Mul (Var x) (SinExpr Sin (Var x))"
 
@@ -153,6 +117,29 @@ After parsing: "BiExpr Add (Var x) (BiExpr Pow (BiExpr Sub (BiExpr Div (Con 6) (
 ```
 
 
+
+## Run the program
+
+To run the program using
+
+```
+stack run
+```
+
+Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
+*For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
+
+
+## Test the program
+
+To test the program using
+
+```
+stack test
+```
+
+
+
 ## Input format
 
 We plan to use stdin for the inputs. The format of the input is as follows:
@@ -160,5 +147,59 @@ We plan to use stdin for the inputs. The format of the input is as follows:
 ```haskell
 The input would be a string. First, the variable which we would do the derivation on is given before a comma. Then the expression will be provided. For example:
 "(x, x*y*sin(x))"
-``` -->
+​``` -->
+
+Here is the calculation result showing in terminal. 
+
+******************
+Calculus Solver
+******************
+Please input the problem as the form, (x, 2*x).
+
+(x, x*y*sin(x))
+((x),(((x)*(y))*(sin(x))))
+={Mul}
+((((x),((x)*(y)))*(sin(x)))+(((x)*(y))*((x),(sin(x)))))
+
+={Mul}
+((((((x),(x))*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((x),(sin(x)))))
+
+={Sin}
+((((((x),(x))*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*((x),(x)))))
+
+={DerivativeSelf}
+(((((1)*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*((x),(x)))))
+
+={DerivativeSelf}
+(((((1)*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
+
+={DerivativeNotSelf}
+(((((1)*(y))+((x)*(0)))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
+
+={ZeroMul}
+(((((1)*(y))+(0))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
+
+={OneMul}
+(((((1)*(y))+(0))*(sin(x)))+(((x)*(y))*(cos(x))))
+
+={OneMul.2}
+((((y)+(0))*(sin(x)))+(((x)*(y))*(cos(x))))
+
+={ZeroAdd}
+(((y)*(sin(x)))+(((x)*(y))*(cos(x))))
+
+```
+
+
+
+### Special feature
+
+In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
+
+
+![image-20200305232449194](/Users/yamogle/Library/Application Support/typora-user-images/image-20200305232449194.png)
+
+There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
+
+ I think  it perhaps because that the `writeDocx` function which generate this file cannot parse the `SoftBreak` properly.  
 
