@@ -1,14 +1,11 @@
-{-# OPTIONS_GHC -Wall #-}
-
 module Rewrites where
 
--- import Data.Char
-import Text.Megaparsec
-import Text.Megaparsec.Char
-import Data.Void(Void)
-import Data.Functor.Identity (Identity)
+-- import Text.Megaparsec
+-- import Text.Megaparsec.Char
+-- import Data.Void(Void)
+-- import Data.Functor.Identity (Identity)
+-- import Laws 
 import Expressions
-import Laws 
 import Substitutions
 import Match
 
@@ -28,11 +25,10 @@ rewrites (eqn_l, eqn_r) (BiExpr op e1 e2) = (helper (eqn_l, eqn_r) (BiExpr op e1
 
 rewrites (eqn_l, eqn_r) (SinExpr op e) = helper (eqn_l, eqn_r) (SinExpr op e)
 
-rewrites (eqn_l, eqn_r) (Con c) = [(Con c)]
-rewrites (eqn_l, eqn_r) (Var v) = [(Var v)]
+rewrites (_, _) (Con c) = [(Con c)]
+rewrites (_, _) (Var v) = [(Var v)]
 
 
 -- apply laws on on expr and get the new expr 
 helper :: Equation -> Expression -> [Expression]
 helper (el, er) exp = [apply er subst | subst <- Match.match el exp]
-
