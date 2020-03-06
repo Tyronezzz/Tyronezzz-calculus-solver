@@ -45,6 +45,19 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
 
+### Special feature
+In this project, we focused on generating a word file. 
+
+
+TO DO!
+
+
+
+
+
+
+
+
 ## Run the program
 To run the program using
 ```
@@ -63,18 +76,14 @@ stack test
 
 
 
+
+
+
+
+
 ## Problems / To do
 
-- configurable rules: How can we decide the order of the rules?
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-
-
--- eg  detail
-
--- special feature  why cannot \n
-
-
-
 
 
 
