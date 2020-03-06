@@ -20,32 +20,37 @@ data Expression = Con Int
                   | SinExpr UnaryOp Expression 
                   | BiExpr BinaryOp Expression Expression deriving (Show, Eq)
 
-
+-- parse a char
 ch :: Parser Char
 ch = do {c <- satisfy (isAlpha); return c}
 
+-- parse a string
 parserString :: Parser String
 parserString = do{ space ;s<- some (ch); return s}
 
+-- parse a variable, e.g, x, y...
 parserVar :: Parser Expression
 parserVar = do{ space ;str <- parserString; return (Var str)}
 
+-- parse a digit
 digit :: Parser Int
 digit = cvt <$> satisfy isDigit  
   where cvt d = fromEnum d - (fromEnum '0')
 
+-- parse digits
 digits :: Parser Int
 digits = do ds <- some digit
             return (foldl1 shiftl ds)
          where shiftl m n = 10*m+n
 
+-- parse a constant, e.g, 1, 2, ...
 parserCon :: Parser Expression
 parserCon = do 
                 space
                 num <- digits
                 return (Con num)
 
-
+-- parse a unary operator
 parserUnaryOp :: Parser UnaryOp
 parserUnaryOp = space *> ((string "sin" *> return Sin)
      <|> (string "cos" *> return Cos)
@@ -53,6 +58,7 @@ parserUnaryOp = space *> ((string "sin" *> return Sin)
      <|> (string "ln" *> return Ln)
      <|> (string "-" *> return Neg))
 
+-- parse a binary operator
 parserBinaryOp :: Parser BinaryOp
 parserBinaryOp = space *> ((string "+" *> return Add)
      <|> (string "-" *> return Sub)
@@ -74,6 +80,7 @@ mulOp = space *> ((string "*" *> return Mul)
 powOp :: ParsecT Void String Identity BinaryOp
 powOp = space *> (string "^" *> return Pow)
 
+-- parse a string and get the Expression
 expr :: Parser Expression
 expr = space *> (term >>= rest)
 
@@ -108,7 +115,7 @@ powexpr e1 = space *> do {
 factor :: ParsecT Void String Identity Expression
 factor = space *>  (try parserSinExpr <|> try oneDeriv <|> try ( string "(" *> space *> expr <*space <* string ")"))
 
-
+-- parse a single expression
 parserSinExpr :: Parser Expression
 parserSinExpr = space *> try(do{  
                                    operator <- parserUnaryOp;
@@ -121,6 +128,7 @@ parserSinExpr = space *> try(do{
                     <|> try parserCon
                     <|> try parserVar
 
+-- parse a derivitive input, e.g, (x, 2*x)
 oneDeriv :: ParsecT Void String Identity Expression
 oneDeriv =  do{ 
                 _ <- string "(";

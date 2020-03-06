@@ -44,6 +44,24 @@ Input: parseTest expr "(x, ((3 log x)+6))"
 Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
+### Laws
+We are using the following laws:
+
+laws = ["add : (x, a+b)=(x, a)+(x, b)",
+        "chain rule : (x, a*b)=(x, a)*b+a*(x, b)",
+        "sin : (x, sin(a))=cos(a)*(x, a)",
+        "cos : (x, cos(a))=-sin(a)*(x, a)", 
+        "ln : (x, ln(a))=(1/a)*(x, a)",
+        "power : (x, a^b)=a^b * (x, b*ln(a))", 
+        "derivative_self : (x, x)=1",
+        "derivative_not_self : (x, y)=0",
+        "constant : (x, a)=0",
+        "zero mul : 0*x = 0",
+        "zero add : 0+x = x",
+        "one mul : 1*x = x",
+        ]
+
+
 
 ### Special feature
 In this project, we focused on generating a word file. 
@@ -76,11 +94,6 @@ stack test
 
 
 
-
-
-
-
-
 ## Problems / To do
 
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
@@ -97,21 +110,10 @@ stack test
 - spaces
 
 
-<!-- comments -->
-<!-- ## Reason with configurable rules
-to do: explain the ideas  
-how?? -->
-
-
 
 <!-- Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
 
-
 Also did some work on pretty print.  -->
-
-
-
-
 
 
 

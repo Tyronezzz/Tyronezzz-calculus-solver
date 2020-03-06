@@ -26,11 +26,13 @@ type LawName = String
 -- e.g. calculate laws i2
 
 
+-- do the calculation and get the steps
 calculate :: [Law] -> Expression -> Calculation
 calculate laws e = Calc e (manyStep rws e)
     where rws e = [Step name e_new | Law name eqn <- sortedlaws, e_new <- rewrites eqn e, e_new /= e]
           sortedlaws = sortLaws laws e
 
+-- get the steps. It works as dfs searching
 manyStep :: (Expression -> [Step]) -> Expression -> [Step] 
 manyStep rws e = case steps of 
                    [] -> []

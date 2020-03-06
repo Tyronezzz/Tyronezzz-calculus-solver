@@ -26,5 +26,6 @@ apply (Con num) subst = if (binding subst (Con num)) /= Nothing then fromJust (b
 apply (Var v) subst = if(binding subst (Var v) /= Nothing) then fromJust (binding subst (Var v)) 
                       else Var v
 
+-- find the Expression in the Subst
 binding :: Subst -> Expression -> Maybe Expression
 binding sub v =  lookup v sub
