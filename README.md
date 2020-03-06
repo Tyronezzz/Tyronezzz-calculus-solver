@@ -45,7 +45,7 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
 ### Laws
-We are using the following laws. The first part is used to do the derivitive operation and the rest is used to simply the result.
+We are using the following laws. The first 9 laws are used to do the derivitive operation and the rest is used to simply the result.
 
 - "add : (x, a+b)=(x, a)+(x, b)",
 - "chain rule : (x, a*b)=(x, a)*b+a*(x, b)",
