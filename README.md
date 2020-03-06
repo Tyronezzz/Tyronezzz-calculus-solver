@@ -160,43 +160,6 @@ The input would be a string. First, the variable which we would do the derivatio
 
 Here is the calculation result showing in terminal. 
 
-**************
-Calculus Solver
-**************
-Please input the problem as the form, (x, 2*x).
-
-(x, x*y*sin(x))
-((x),(((x)*(y))*(sin(x))))
-={Mul}
-((((x),((x)*(y)))*(sin(x)))+(((x)*(y))*((x),(sin(x)))))
-
-={Mul}
-((((((x),(x))*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((x),(sin(x)))))
-
-={Sin}
-((((((x),(x))*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*((x),(x)))))
-
-={DerivativeSelf}
-(((((1)*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*((x),(x)))))
-
-={DerivativeSelf}
-(((((1)*(y))+((x)*((x),(y))))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
-
-={DerivativeNotSelf}
-(((((1)*(y))+((x)*(0)))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
-
-={ZeroMul}
-(((((1)*(y))+(0))*(sin(x)))+(((x)*(y))*((cos(x))*(1))))
-
-={OneMul}
-(((((1)*(y))+(0))*(sin(x)))+(((x)*(y))*(cos(x))))
-
-={OneMul.2}
-((((y)+(0))*(sin(x)))+(((x)*(y))*(cos(x))))
-
-={ZeroAdd}
-(((y)*(sin(x)))+(((x)*(y))*(cos(x))))
-
 ```
 
 
