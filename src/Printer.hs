@@ -11,6 +11,9 @@ import Calculations
 
 import Text.Pandoc.Builder
 import Text.Pandoc
+import Text.Pandoc.Writers
+import Text.Pandoc.Definition
+import Text.Pandoc.Options
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text.Lazy as TL
 
@@ -38,15 +41,17 @@ mydoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "
 
 
 
-showResult str = case parse expr "" str of
-                    Left bundle -> putStr (errorBundlePretty bundle)
-                    Right a -> print (pretty (calculate laws a))
-
-
 ggFunc pc = do
     let letter = mydoc pc
     docx <- runIO (writeDocx def letter) >>= handleError
     BL.writeFile "letter.docx" docx
+
+
+-- ggFunc pc = do
+--     temp <- readFile "template.tex"
+--     let pdf_file = writeLaTeX (def {  writerTemplate = temp}) letter
+--     docx <- runIO (writeDocx def letter) >>= handleError
+--     BL.writeFile "letter.docx" docx
 
 --  print Expression
 instance Pretty Expression where
