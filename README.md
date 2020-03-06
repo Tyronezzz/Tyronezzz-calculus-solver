@@ -95,35 +95,7 @@ There is still a bug that we have not solved yet, which is the line break is par
 
 
 
-<!-- 
-We changed our `Expression` in order to solve the problem that in your feedback to the following:
 
-```haskell
-data Expression = Con Int 
-                  | Var String 
-                  | Derivative Expression Expression 
-                  | SinExpr UnaryOp Expression 
-                  | BiExpr BinaryOp Expression Expression deriving Show
-```
-
-So, now each step could also include a derivative expression. 
-
-Also, we wrote a parser that could parse our problems. For example:
-
-```haskell
-Input: parseTest parserExpression "(x, ((3 log x) + 6))"
-Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
-​``` -->
-<!-- ## Example for Expression
-
-​```haskell
-Input: "x * sin(x)"
-After parsing: "BiExpr Mul (Var x) (SinExpr Sin (Var x))"
-
-Input: "x + (6 / 5 - y) ^ 2"
-After parsing: "BiExpr Add (Var x) (BiExpr Pow (BiExpr Sub (BiExpr Div (Con 6) (Con 5)) (Var y)) (Con 2))"
-
-```
 
 
 
@@ -156,12 +128,11 @@ We plan to use stdin for the inputs. The format of the input is as follows:
 ```haskell
 The input would be a string. First, the variable which we would do the derivation on is given before a comma. Then the expression will be provided. For example:
 "(x, x*y*sin(x))"
-​``` -->
+```
 
 Here is the calculation result showing in terminal. 
 
-```
-
+![result1](https://user-images.githubusercontent.com/15730783/76054392-7e4fee00-5f3e-11ea-92ba-83ace6e8a88e.png)
 
 
  
