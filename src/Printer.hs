@@ -1,21 +1,45 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
 import Data.Text.Prettyprint.Doc.Render.String as Render
+
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Expressions
 import Laws
 import Calculations
 
+import Text.Pandoc
+import qualified Data.Text as T
+import qualified Data.Text.IO as TIO
+
+import Text.Pandoc.Builder
+import qualified Data.ByteString.Lazy as BL
+
+-- mydoc :: Pandoc
+-- mydoc = doc $ header 1 (text "Hello!")
+--            <> para (emph (text "hello world") <> text ".")
+
+-- main :: IO ()
+-- main = print mydoc
+
+
+
+
+-- pandoc_print :: IO()
+-- pandoc_print = do
+--   result <- runIO $ do
+--     doc <- readMarkdown def (T.pack "[testing](url)")
+--     writeRST def doc
+--   rst <- handleError result
+--   TIO.putStrLn rst
+
 
 
 showResult str = case parse expr "" str of
                     Left bundle -> putStr (errorBundlePretty bundle)
                     Right a -> print (pretty (calculate laws a))
-
-
-
 
 --  print Expression
 instance Pretty Expression where
@@ -58,7 +82,7 @@ instance Pretty BinaryOp where
     pretty Add = pretty "+"
     pretty Sub = pretty "-"
     pretty Mul = pretty "*"
-    pretty Div = pretty "/"
+    pretty Expressions.Div = pretty "/"
     pretty Pow = pretty "^"
     pretty Log = pretty "log"
 
