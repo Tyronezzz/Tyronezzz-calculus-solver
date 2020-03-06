@@ -45,21 +45,22 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 ```
 
 ### Laws
-We are using the following laws:
+We are using the following laws. The first part is used to do the derivitive operation and the rest is used to simply the result.
 
-laws = ["add : (x, a+b)=(x, a)+(x, b)",
-        "chain rule : (x, a*b)=(x, a)*b+a*(x, b)",
-        "sin : (x, sin(a))=cos(a)*(x, a)",
-        "cos : (x, cos(a))=-sin(a)*(x, a)", 
-        "ln : (x, ln(a))=(1/a)*(x, a)",
-        "power : (x, a^b)=a^b * (x, b*ln(a))", 
-        "derivative_self : (x, x)=1",
-        "derivative_not_self : (x, y)=0",
-        "constant : (x, a)=0",
-        "zero mul : 0*x = 0",
-        "zero add : 0+x = x",
-        "one mul : 1*x = x",
-        ]
+- "add : (x, a+b)=(x, a)+(x, b)",
+- "chain rule : (x, a*b)=(x, a)*b+a*(x, b)",
+- "sin : (x, sin(a))=cos(a)*(x, a)",
+- "cos : (x, cos(a))=-sin(a)*(x, a)", 
+- "ln : (x, ln(a))=(1/a)*(x, a)",
+- "power : (x, a^b)=a^b * (x, b*ln(a))", 
+- "derivative_self : (x, x)=1",
+- "derivative_not_self : (x, y)=0",
+- "constant : (x, a)=0",
+
+- "zero mul : 0*x = 0",
+- "zero add : 0+x = x",
+- "one mul : 1*x = x"
+
 
 
 
