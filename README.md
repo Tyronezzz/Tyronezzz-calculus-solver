@@ -69,6 +69,14 @@ stack test
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
 
 
+-- eg  detail
+
+-- special feature  why cannot \n
+
+
+
+
+
 
 
 ## Bugs fixed
