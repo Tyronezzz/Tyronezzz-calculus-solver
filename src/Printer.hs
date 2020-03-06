@@ -1,39 +1,14 @@
-<<<<<<< HEAD
-{-# LANGUAGE OverloadedStrings #-}
-module Printer where
-
-import Data.Text.Prettyprint.Doc as Doc
-import Data.Text.Prettyprint.Doc.Render.String as Render
-
-=======
 -- {-# LANGUAGE OverloadedStrings #-}
 module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
 import Data.Text.Prettyprint.Doc.Render.Text as Render
->>>>>>> 146ee2484b5202c6c921a170e2f3f0b11545ec98
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Expressions
 import Laws
 import Calculations
 
-<<<<<<< HEAD
-import Text.Pandoc
-import qualified Data.Text as T
-import qualified Data.Text.IO as TIO
-
-import Text.Pandoc.Builder
-import qualified Data.ByteString.Lazy as BL
-
--- mydoc :: Pandoc
--- mydoc = doc $ header 1 (text "Hello!")
---            <> para (emph (text "hello world") <> text ".")
-
--- main :: IO ()
--- main = print mydoc
-
-=======
 import Text.Pandoc.Builder
 import Text.Pandoc
 import qualified Data.ByteString.Lazy as BL
@@ -50,7 +25,6 @@ showResult str = case parse expr "" str of
 mydoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "header" )))))
            <> para ((text ( ( Render.renderStrict (layoutPretty (defaultLayoutOptions)( pc )))) ) )
 
->>>>>>> 146ee2484b5202c6c921a170e2f3f0b11545ec98
 
 
 
