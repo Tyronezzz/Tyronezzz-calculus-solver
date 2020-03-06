@@ -34,13 +34,11 @@ match (Con n1) (Con n2)
 match _ _ = [] 
 
 
-
-
 -- decide whether the subst of subexp are valid, for example, two subexpression of a binary expression
 compatible :: Subst -> Subst -> Bool
 compatible [] _ = True
 compatible _ [] = True
-compatible subst1 subst2 = anyFalse boolList
+compatible subst1 subst2 = and boolList
                                 where boolList = compatibleHelper subst1 subst2
 
 compatibleHelper :: Subst -> Subst -> [Bool]
@@ -48,10 +46,5 @@ compatibleHelper subst1 subst2 = [compatibleInside subst1_ele subst2_ele | subst
 
 
 compatibleInside :: (Eq a) => (a, a) -> (a, a) -> Bool
--- compatibleInside [] _ = True
--- compatibleInside _ [] = True
 compatibleInside (lf_e1, rt_e1) (lf_e2, rt_e2) = if lf_e1 /= lf_e2 then True else rt_e1 == rt_e2
 
-anyFalse :: [Bool] -> Bool
-anyFalse [] = True
-anyFalse (x:xs) = if x /= True then False else anyFalse xs

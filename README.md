@@ -64,42 +64,6 @@ We are using the following laws. The first 9 laws are used to do the derivitive 
 
 
 
-### Special feature
-In this project, we focused on generating a word file. 
-
-
-TO DO!
-
-
-
-
-
-
-
-
-## Run the program
-To run the program using
-```
-stack run
-```
-
-Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
-*For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
-
-
-## Test the program
-To test the program using
-```
-stack test
-```
-
-
-
-## Problems / To do
-
-- simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-
-
 
 
 ## Bugs fixed
@@ -115,7 +79,16 @@ stack test
 <!-- Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
 
 Also did some work on pretty print.  -->
+### Special feature
 
+In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
+
+
+![result](https://user-images.githubusercontent.com/15730783/76054021-367c9700-5f3d-11ea-93b1-196ae9afe44d.png)
+
+There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
+
+ I think  it perhaps because that the `writeDocx` function which generate this file cannot parse the `SoftBreak` properly. 
 
 
 <!-- Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you. -->
@@ -140,10 +113,10 @@ Also, we wrote a parser that could parse our problems. For example:
 ```haskell
 Input: parseTest parserExpression "(x, ((3 log x) + 6))"
 Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
-``` -->
+​``` -->
 <!-- ## Example for Expression
 
-```haskell
+​```haskell
 Input: "x * sin(x)"
 After parsing: "BiExpr Mul (Var x) (SinExpr Sin (Var x))"
 
@@ -153,6 +126,29 @@ After parsing: "BiExpr Add (Var x) (BiExpr Pow (BiExpr Sub (BiExpr Div (Con 6) (
 ```
 
 
+
+## Run the program
+
+To run the program using
+
+```
+stack run
+```
+
+Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
+*For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
+
+
+## Test the program
+
+To test the program using
+
+```
+stack test
+```
+
+
+
 ## Input format
 
 We plan to use stdin for the inputs. The format of the input is as follows:
@@ -160,5 +156,13 @@ We plan to use stdin for the inputs. The format of the input is as follows:
 ```haskell
 The input would be a string. First, the variable which we would do the derivation on is given before a comma. Then the expression will be provided. For example:
 "(x, x*y*sin(x))"
-``` -->
+​``` -->
+
+Here is the calculation result showing in terminal. 
+
+```
+
+
+
+ 
 

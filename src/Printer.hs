@@ -10,6 +10,9 @@ import Calculations
 
 import Text.Pandoc.Builder
 import Text.Pandoc
+import Text.Pandoc.Writers
+import Text.Pandoc.Definition
+import Text.Pandoc.Options
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text.Lazy as TL
 
@@ -21,7 +24,7 @@ showResult str = case parse expr "" str of
                                     generatePdf (pretty (calculate laws a));
                     }
 
-resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "Calculus Solver" )))))
+resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "A Haskell Calculus Solver!" )))))
            <> para ((text ( ( Render.renderStrict (layoutPretty defaultLayoutOptions pc ))) ) )
 
 

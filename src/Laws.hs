@@ -26,7 +26,7 @@ parserEquation = do{
 sortLaws :: [Law] -> Expression -> [Law]
 sortLaws laws expr = laws
 
-
+-- all the laws
 laws :: [Law]
 laws = [Law "Add" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),BiExpr Add (Derivative (Var "x") (Var "a")) (Derivative (Var "x") (Var "b"))),
 
@@ -54,11 +54,3 @@ laws = [Law "Add" (Derivative (Var "x") (BiExpr Add (Var "a") (Var "b")),BiExpr 
         Law "ZeroAdd" (BiExpr Add (Var "x") (Con 0), Var "x"), 
         Law "ZeroAdd.2" (BiExpr Add (Con 0) (Var "x"), Var "x")
         ]
-
--- laws = ["addition : (x, a+b)=(x, a)+(x, b)",
---         "rule : (x, a*b)=(x, a)*b+a*(x, b)",
---         "sin : (x, sin(a))=cos(a)*(x, a)",
---         "cos : (x, cos(a))=-sin(a)*(x, a)", 
---         "ln : (x, ln(a))=(1/a)*(x, a)",
---         "power : (x, a^b)=a^b * (x, b*ln(a))", 
---         "derivative_self : (x, x)=1"]
