@@ -1,15 +1,17 @@
 # calculus-solver
-------------------
+
+This project is used for solving derivitive problems. Now, it supports +, -, *, /, ^, sin, cos, ln operators.
+
 
 ## Design the structure
 Based on our data type, we build the program with some modules. 
--- Expressions: parse the input string and output the Expression type.
--- Laws: 
--- Match: Match the current expression with the left hand side equation. If they are match, return a substitution list. 
--- Printer: Print the data types.
--- Substitutions: Substitude the right hand side equation with the pairs in Subst.
--- Rewrites: Match the expression with the equation then get the new expression according to the law.
--- Calculations: Do the calculations and get many steps of the derivition. 
+- Expressions: parse the input string and output the Expression type.
+- Laws: Give the derivitive laws.
+- Match: Match the current expression with the left hand side equation. If they are match, return a substitution list. 
+- Printer: Print the data types.
+- Substitutions: Substitude the right hand side equation with the pairs in Subst.
+- Rewrites: Match the expression with the equation then get the new expression according to the law.
+- Calculations: Do the calculations and get many steps of the derivition. 
 
 
 ### Data structures
@@ -44,21 +46,20 @@ Output: Derivative (Var "x") (BiExpr Add (BiExpr Log (Con 3) (Var "x")) (Con 6))
 
 
 ## Run the program
-First run the program using
+To run the program using
 ```
 stack run
 ```
 
-Then input your question, for example, (x, 2*x). Press the enter and then you can get the steps.
-Be careful, you cannot use key left, key right. You can only solve one problem in this program.
-
+Then input your question, for example, (x, x^2), for the derivative of x^2 to x. Press the enter and then you can get the steps.Be careful, you cannot use key left, key right. You can only solve one problem in this program.
 *For unary expressions like sin(x), you need to type as (sin (x)) with the outer brackets.*
 
 
-
-## Reason with configurable rules
-<!-- to do: explain the ideas  -->
-how??
+## Test the program
+To test the program using
+```
+stack test
+```
 
 
 
@@ -66,7 +67,15 @@ how??
 
 - configurable rules: How can we decide the order of the rules?
 - simplify the result   How can can we simplify the result such as "1+2"?  --((x ^ 2) * (2 * (1 / x)))
-- space, seems fixed ??
+
+
+-- eg  detail
+
+-- special feature  why cannot \n
+
+
+
+
 
 
 
@@ -76,17 +85,13 @@ how??
 - parse input for para in calculate
 - compatible for multi-variables
 - pretty print
+- spaces
 
 
-
-<!-- comments
-tests??
-
-readme
-- structure, explain
-- how to run
-- improved parts -->
-
+<!-- comments -->
+<!-- ## Reason with configurable rules
+to do: explain the ideas  
+how?? -->
 
 
 

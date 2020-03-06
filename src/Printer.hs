@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 {-# LANGUAGE OverloadedStrings #-}
 module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
 import Data.Text.Prettyprint.Doc.Render.String as Render
 
+=======
+-- {-# LANGUAGE OverloadedStrings #-}
+module Printer where
+
+import Data.Text.Prettyprint.Doc as Doc
+import Data.Text.Prettyprint.Doc.Render.Text as Render
+>>>>>>> 146ee2484b5202c6c921a170e2f3f0b11545ec98
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Expressions
 import Laws
 import Calculations
 
+<<<<<<< HEAD
 import Text.Pandoc
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
@@ -24,6 +33,24 @@ import qualified Data.ByteString.Lazy as BL
 -- main :: IO ()
 -- main = print mydoc
 
+=======
+import Text.Pandoc.Builder
+import Text.Pandoc
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.Text.Lazy as TL
+
+showResult str = case parse expr "" str of
+                    Left bundle -> putStr (errorBundlePretty bundle)
+                    Right a -> do {
+                                    -- pretty_cal <- pretty (calculate laws a);
+                                    print (pretty (calculate laws a));
+                                    ggFunc (pretty (calculate laws a));
+                    }
+
+mydoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "header" )))))
+           <> para ((text ( ( Render.renderStrict (layoutPretty (defaultLayoutOptions)( pc )))) ) )
+
+>>>>>>> 146ee2484b5202c6c921a170e2f3f0b11545ec98
 
 
 
@@ -41,20 +68,15 @@ showResult str = case parse expr "" str of
                     Left bundle -> putStr (errorBundlePretty bundle)
                     Right a -> print (pretty (calculate laws a))
 
+
+ggFunc pc = do
+    let letter = mydoc pc
+    docx <- runIO (writeDocx def letter) >>= handleError
+    BL.writeFile "letter.docx" docx
+
 --  print Expression
 instance Pretty Expression where
-    -- pretty (Con num) = flatAlt ( (cat [lparen <> (pretty num), rparen]))
-    --                                     (cat [lparen <> (pretty num), rparen])
-    -- pretty (Var s) = flatAlt ( (cat [lparen <>  (pretty s), rparen]))
-    --                                     (cat [lparen <> (pretty s), rparen])
-
-    -- pretty (Derivative v e) = flatAlt ( (cat [lparen <> ( pretty v <> comma <> softline <>  ( pretty e)), rparen]))
-    --                                     (cat [lparen <> (pretty v <> comma <> softline <>  ( pretty e)), rparen])
-    -- pretty (SinExpr uOp e) = flatAlt ( (cat [lparen <>  ( pretty uOp <> softline <>  ( pretty e)), rparen]))
-    --                                     (cat [lparen <>  (pretty uOp  <> softline <>  ( pretty e)), rparen])
-    -- -- pretty (SinExpr uOp e) = lparen <> pretty uOp <> pretty e <> rparen
-    -- pretty (BiExpr biOp e1 e2) = flatAlt ( (cat [lparen <>  ( pretty e1 <> softline <>  ( pretty biOp) <> softline <>  ( pretty e2)), rparen]))
-    --                                     (cat [lparen <> (pretty e1  <> softline <>  ( pretty biOp) <> softline <>  ( pretty e2)), rparen])
+    
     pretty (Con num) = flatAlt ( ( lparen <> (pretty num) <> rparen))
                                         ( lparen <> (pretty num)<>rparen)
     pretty (Var s) = flatAlt ( ( lparen <>  (pretty s)<> rparen))
@@ -91,8 +113,7 @@ instance Pretty BinaryOp where
 --print Step
 instance Pretty Step where
     pretty (Step lName e) = 
-        lbrace <> pretty lName <> rbrace <> line  <> equals <>  (  ( pretty e)) <> line
-
+        equals <>lbrace <> pretty lName <> rbrace <> line   <>  (  ( pretty e)) <> line
 
 --print Calculation                                       
 instance Pretty Calculation where
