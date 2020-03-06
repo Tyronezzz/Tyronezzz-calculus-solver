@@ -151,9 +151,9 @@ The input would be a string. First, the variable which we would do the derivatio
 
 Here is the calculation result showing in terminal. 
 
-******************
+/******************
 Calculus Solver
-******************
+/******************
 Please input the problem as the form, (x, 2*x).
 
 (x, x*y*sin(x))
@@ -197,7 +197,7 @@ Please input the problem as the form, (x, 2*x).
 In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
 
 
-![image-20200305232449194](/Users/yamogle/Library/Application Support/typora-user-images/image-20200305232449194.png)
+![image-20200305232449194](https://ibb.co/LnD3H4N)
 
 There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
 
