@@ -79,7 +79,16 @@ We are using the following laws. The first 9 laws are used to do the derivitive 
 <!-- Now we have finished the rewrites function. But we are not sure about match and substitution. For match, should we return [Subst]? If so, we have a list of possible substitutions. For example, for the input "1+2+3", and there is an add rule x + y = ..., then it should return [[(x, 1+2), (y, 3)], [(x,1), (y,2+3)]]. But we are not sure how to get the [Subst].
 
 Also did some work on pretty print.  -->
+### Special feature
 
+In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
+
+
+![result](https://user-images.githubusercontent.com/15730783/76054021-367c9700-5f3d-11ea-93b1-196ae9afe44d.png)
+
+There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
+
+ I think  it perhaps because that the `writeDocx` function which generate this file cannot parse the `SoftBreak` properly. 
 
 
 <!-- Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you. -->
@@ -151,9 +160,9 @@ The input would be a string. First, the variable which we would do the derivatio
 
 Here is the calculation result showing in terminal. 
 
-******************
+**************
 Calculus Solver
-******************
+**************
 Please input the problem as the form, (x, 2*x).
 
 (x, x*y*sin(x))
@@ -192,14 +201,5 @@ Please input the problem as the form, (x, 2*x).
 
 
 
-### Special feature
-
-In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
-
-
-![image-20200305232449194](https://i.ibb.co/cDKjVzY/image-20200305232449194.png)
-
-There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
-
- I think  it perhaps because that the `writeDocx` function which generate this file cannot parse the `SoftBreak` properly.  
+ 
 
