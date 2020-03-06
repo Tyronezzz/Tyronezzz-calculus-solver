@@ -3,22 +3,31 @@ module Main where
 
 import Expressions
 import Printer
--- import Text.Pandoc.Builder
--- import Text.Pandoc
+import Text.Pandoc.Builder
+import Text.Pandoc
+import Data.Monoid ((<>), mempty, mconcat)
+import Data.Aeson
+import Control.Monad
+import Control.Monad.IO.Class
+import Control.Applicative
+import Control.Monad (mzero)
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.Text as T
+import Data.List (intersperse)
+import Printer
+import Calculations
+
+
 
 
 main :: IO ()
-main = do putStrLn "\n******************\nCalculus Solver\n******************\nPlease input the problem as the form, (x, 2*x).\n" 
-          str <- getLine
-          showResult str
+-- main = do putStrLn "\n******************\nCalculus Solver\n******************\nPlease input the problem as the form, (x, 2*x).\n" 
+--           str <- getLine
+--           showResult str
 
 
--- main =  do
---     letter <- getLetter
---     temp <- readFile "template.tex"
---     let str_should_have_something = writeLaTeX (def {writerStandalone = True, writerTemplate = temp}) letter
---     print str_should_have_something
---     mybytes <- export temp letter
 
---     case mybytes of Right b -> BL.writeFile "mypdf.pdf" b
---                     Left  _ -> putStrLn "Export error"
+
+
+main = ggFunc
+--   print mydoc

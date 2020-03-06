@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
@@ -8,14 +9,23 @@ import Expressions
 import Laws
 import Calculations
 
+import Text.Pandoc.Builder
+import Text.Pandoc
+import qualified Data.ByteString.Lazy as BL
 
 
 showResult str = case parse expr "" str of
                     Left bundle -> putStr (errorBundlePretty bundle)
                     Right a -> print (pretty (calculate laws a))
 
+mydoc = doc $ header 1 (text "Hello!")
+           <> para (emph (text ( pretty (calculate laws i4))) <> text ".")
 
 
+ggFunc = do
+    let letter = mydoc
+    docx <- runIO (writeDocx def letter) >>= handleError
+    BL.writeFile "letter.docx" docx
 
 --  print Expression
 instance Pretty Expression where
@@ -58,7 +68,7 @@ instance Pretty BinaryOp where
     pretty Add = pretty "+"
     pretty Sub = pretty "-"
     pretty Mul = pretty "*"
-    pretty Div = pretty "/"
+    pretty Expressions.Div = pretty "/"
     pretty Pow = pretty "^"
     pretty Log = pretty "log"
 
