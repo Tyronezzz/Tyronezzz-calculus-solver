@@ -1,4 +1,3 @@
--- {-# LANGUAGE OverloadedStrings #-}
 module Printer where
 
 import Data.Text.Prettyprint.Doc as Doc
@@ -17,34 +16,22 @@ import Text.Pandoc.Options
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text.Lazy as TL
 
+-- show the result on the terminal
 showResult str = case parse expr "" str of
                     Left bundle -> putStr (errorBundlePretty bundle)
                     Right a -> do {
-                                    -- pretty_cal <- pretty (calculate laws a);
                                     print (pretty (calculate laws a));
-                                    ggFunc (pretty (calculate laws a));
+                                    generatePdf (pretty (calculate laws a));
                     }
 
-mydoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "header" )))))
-           <> para ((text ( ( Render.renderStrict (layoutPretty (defaultLayoutOptions)( pc )))) ) )
+resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "Calculus Solver" )))))
+           <> para ((text ( ( Render.renderStrict (layoutPretty defaultLayoutOptions pc ))) ) )
 
 
-
-
--- pandoc_print :: IO()
--- pandoc_print = do
---   result <- runIO $ do
---     doc <- readMarkdown def (T.pack "[testing](url)")
---     writeRST def doc
---   rst <- handleError result
---   TIO.putStrLn rst
-
-
-
-ggFunc pc = do
-    let letter = mydoc pc
-    docx <- runIO (writeDocx def letter) >>= handleError
-    BL.writeFile "letter.docx" docx
+-- generate a word file
+generatePdf pc = do
+    docx <- runIO (writeDocx def (resultDoc pc)) >>= handleError
+    BL.writeFile "result.docx" docx
 
 
 -- ggFunc pc = do
@@ -65,7 +52,6 @@ instance Pretty Expression where
                                         ( lparen <> (pretty v <> comma  <>  ( pretty e))<> rparen)
     pretty (SinExpr uOp e) = flatAlt ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
                                         ( lparen <>  (pretty uOp   <>  ( pretty e)) <> rparen)
-    -- pretty (SinExpr uOp e) = lparen <> pretty uOp <> pretty e <> rparen
     pretty (BiExpr biOp e1 e2) = flatAlt ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
                                         (  lparen <> (pretty e1   <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen)
 
@@ -88,7 +74,6 @@ instance Pretty BinaryOp where
     pretty Log = pretty "log"
 
 
-
 --print Step
 instance Pretty Step where
     pretty (Step lName e) = 
@@ -97,4 +82,3 @@ instance Pretty Step where
 --print Calculation                                       
 instance Pretty Calculation where
     pretty (Calc e ss) = ( ( pretty e )) <> line <>  (sep (map pretty ss))
-                                      

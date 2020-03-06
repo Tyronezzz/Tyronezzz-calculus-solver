@@ -6,7 +6,7 @@ import Data.Void(Void)
 import Data.Functor.Identity (Identity)
 import Expressions
 
-
+-- parse a law
 parserLaw :: Parser Law
 parserLaw = do{
                 lawName <- parserString;
@@ -14,6 +14,7 @@ parserLaw = do{
                 eq <- space *> parserEquation;
                 return (Law lawName eq)}
 
+-- parse an equation
 parserEquation :: ParsecT Void String Identity (Expression, Expression)
 parserEquation = do{
                     exp1 <- space *> expr;
