@@ -77,7 +77,7 @@ We are using the following laws. The first 9 laws are used to do the derivitive 
 In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
 
 
-![result](https://user-images.githubusercontent.com/15730783/76132998-e4428100-5fe3-11ea-916f-9d73a3ed51f7.png)
+![result](https://user-images.githubusercontent.com/15730783/76133152-ca556e00-5fe4-11ea-907f-a4f066861191.png)
 
 Solved the newline problem and updated the printer so that it will not print outer parenthesis for `constant`, `variable` and `unary expression`. 
 
