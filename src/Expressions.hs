@@ -9,7 +9,7 @@ import Data.Functor.Identity (Identity)
 
 type Parser = ParsecT Void String Identity
 
-
+-- data structure 
 data Law = Law String Equation deriving Show
 type Equation = (Expression, Expression)
 data UnaryOp = Sin | Cos | Tan | Ln | Neg deriving (Show, Eq)
@@ -84,7 +84,7 @@ powOp = space *> (string "^" *> return Pow)
 expr :: Parser Expression
 expr = space *> (term >>= rest)
 
-
+-- factor2, more, rest to determine the precedence
 rest :: Expression -> ParsecT Void String Identity Expression
 rest e1 = space *> do {
                        p <- addOp;

@@ -20,4 +20,8 @@ version              1.2.0.0
 Already done the project, we have completed basic version, but have little bugs on generating the word file.
 
 
+version              1.2.0.1
+Finished the project, fix the bug of \n.
+
+
 ## Unreleased changes

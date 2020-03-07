@@ -1,10 +1,5 @@
 module Rewrites where
 
--- import Text.Megaparsec
--- import Text.Megaparsec.Char
--- import Data.Void(Void)
--- import Data.Functor.Identity (Identity)
--- import Laws 
 import Expressions
 import Substitutions
 import Match
