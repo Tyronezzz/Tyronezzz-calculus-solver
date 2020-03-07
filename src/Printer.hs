@@ -59,10 +59,10 @@ instance Pretty Expression where
                                         
     pretty (Derivative v e) =  ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
                                         
-    pretty (SinExpr uOp e) =  ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
+    pretty (SinExpr uOp e) =  ( (  ( pretty uOp  <>  ( pretty e)) ))
                                        
     pretty (BiExpr biOp e1 e2) =  ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
-    
+
 --  print Unary operator
 instance Pretty UnaryOp where
     pretty Sin = pretty "sin"
