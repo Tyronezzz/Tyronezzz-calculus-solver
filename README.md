@@ -86,6 +86,8 @@ In this project, besides the terminal output, we also used `pandoc` to generate 
 
 ![result](https://user-images.githubusercontent.com/15730783/76132998-e4428100-5fe3-11ea-916f-9d73a3ed51f7.png)
 
+Solved the newline problem and updated the printer so that it will not print outer parenthesis for `costant`, `viriable` and `Unary expression`. 
+
 
 <!-- Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you. -->
 
