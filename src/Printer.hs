@@ -36,10 +36,15 @@ generatePdf pc = do
 --  print Expression
 instance Pretty Expression where
     
-    pretty (Con num) = flatAlt ( ( lparen <> (pretty num) <> rparen))
-                                        ( lparen <> (pretty num)<>rparen)
-    pretty (Var s) = flatAlt ( ( lparen <>  (pretty s)<> rparen))
-                                        ( lparen <> (pretty s)<> rparen)
+    -- pretty (Con num) = flatAlt ( ( lparen <> (pretty num) <> rparen))
+    --                                     ( lparen <> (pretty num)<>rparen)
+    -- pretty (Var s) = flatAlt ( ( lparen <>  (pretty s)<> rparen))
+    --                                     ( lparen <> (pretty s)<> rparen)
+
+    pretty (Con num) = flatAlt (pretty num)
+                                        (pretty num)
+    pretty (Var s) = flatAlt (pretty s)
+                                        (pretty s)                                   
 
     pretty (Derivative v e) = flatAlt ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
                                         ( lparen <> (pretty v <> comma  <>  ( pretty e))<> rparen)
