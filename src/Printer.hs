@@ -25,8 +25,11 @@ showResult str = case parse expr "" str of
                     }
 
 resultDoc pc = doc $ header 1 (text ( ( Render.renderStrict (layoutCompact( pretty "A Haskell Calculus Solver!" )))))
-           <> para ((text ( ( Render.renderStrict (layoutPretty defaultLayoutOptions pc ))) ) )
+           <> para ((code ( ( Render.renderStrict (layoutPretty defaultLayoutOptions pc ))) ) )
 
+
+           
+--doc $ para ((str ( ( Render.renderStrict (layoutPretty defaultLayoutOptions  (pretty (calculate laws i4))) )) ) )
 
 -- generate a word file
 generatePdf pc = do
@@ -43,17 +46,17 @@ generatePdf pc = do
 --  print Expression
 instance Pretty Expression where
     
-    pretty (Con num) = flatAlt ( ( lparen <> (pretty num) <> rparen))
-                                        ( lparen <> (pretty num)<>rparen)
-    pretty (Var s) = flatAlt ( ( lparen <>  (pretty s)<> rparen))
-                                        ( lparen <> (pretty s)<> rparen)
+    pretty (Con num) =  ( ( lparen <> (pretty num) <> rparen))
+                            
+    pretty (Var s) =  ( ( lparen <>  (pretty s)<> rparen))
+                                        
 
-    pretty (Derivative v e) = flatAlt ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
-                                        ( lparen <> (pretty v <> comma  <>  ( pretty e))<> rparen)
-    pretty (SinExpr uOp e) = flatAlt ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
-                                        ( lparen <>  (pretty uOp   <>  ( pretty e)) <> rparen)
-    pretty (BiExpr biOp e1 e2) = flatAlt ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
-                                        (  lparen <> (pretty e1   <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen)
+    pretty (Derivative v e) =  ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
+                                        
+    pretty (SinExpr uOp e) =  ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
+                                       
+    pretty (BiExpr biOp e1 e2) =  ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
+                                        
 
 
 --  print Unary operator
@@ -77,8 +80,8 @@ instance Pretty BinaryOp where
 --print Step
 instance Pretty Step where
     pretty (Step lName e) = 
-        equals <>lbrace <> pretty lName <> rbrace <> line   <>  (  ( pretty e)) <> line
+        equals <>lbrace <> pretty lName <> rbrace <> hardline   <>  (  ( pretty e)) <> hardline
 
 --print Calculation                                       
 instance Pretty Calculation where
-    pretty (Calc e ss) = ( ( pretty e )) <> line <>  (sep (map pretty ss))
+    pretty (Calc e ss) = ( ( pretty e )) <> hardline <>  (sep (map pretty ss))
