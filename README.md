@@ -86,10 +86,6 @@ In this project, besides the terminal output, we also used `pandoc` to generate 
 
 ![result](https://user-images.githubusercontent.com/15730783/76054021-367c9700-5f3d-11ea-93b1-196ae9afe44d.png)
 
-There is still a bug that we have not solved yet, which is the line break is parsed as space in the output file. So, the `pandoc` typed variable contains the `SoftBreak` in its body, however all `SoftBreak` are parsed as single space in the output file.
-
- I think  it perhaps because that the `writeDocx` function which generate this file cannot parse the `SoftBreak` properly. 
-
 
 <!-- Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you. -->
 
