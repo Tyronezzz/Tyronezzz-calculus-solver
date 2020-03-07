@@ -36,13 +36,6 @@ generatePdf pc = do
     docx <- runIO (writeDocx def (resultDoc pc)) >>= handleError
     BL.writeFile "result.docx" docx
 
-
--- ggFunc pc = do
---     temp <- readFile "template.tex"
---     let pdf_file = writeLaTeX (def {  writerStandalone = True, writerTemplate = temp}) letter
---     docx <- runIO (writeDocx def letter) >>= handleError
---     BL.writeFile "letter.docx" docx
-
 --  print Expression
 instance Pretty Expression where
     

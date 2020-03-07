@@ -9,7 +9,7 @@ main = defaultMain (testGroup "Library Tests" [test1, test2, test3
                                                ,test4, test5, test6
                                                ,test7 ])
 
-test1, test2 :: TestTree
+test1, test2, test3, test4, test5, test6, test7 :: TestTree
 
 
 -- tests for match
