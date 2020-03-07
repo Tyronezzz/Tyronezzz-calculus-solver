@@ -37,21 +37,32 @@ generatePdf pc = do
     BL.writeFile "result.docx" docx
 
 --  print Expression
-instance Pretty Expression where
+-- instance Pretty Expression where
     
-    pretty (Con num) =  ( ( lparen <> (pretty num) <> rparen))
+--     pretty (Con num) =  ( ( lparen <> (pretty num) <> rparen))
                             
-    pretty (Var s) =  ( ( lparen <>  (pretty s)<> rparen))
+--     pretty (Var s) =  ( ( lparen <>  (pretty s)<> rparen))
                                         
 
+--     pretty (Derivative v e) =  ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
+                                        
+--     pretty (SinExpr uOp e) =  ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
+                                       
+--     pretty (BiExpr biOp e1 e2) =  ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
+                                        
+
+instance Pretty Expression where
+    
+    pretty (Con num) =  ( ((pretty num)))
+                            
+    pretty (Var s) =  ( (  (pretty s)))
+                                        
     pretty (Derivative v e) =  ( ( lparen <> ( pretty v <> comma  <>  ( pretty e)) <> rparen))
                                         
     pretty (SinExpr uOp e) =  ( ( lparen <>  ( pretty uOp  <>  ( pretty e)) <> rparen))
                                        
     pretty (BiExpr biOp e1 e2) =  ( ( lparen <>  ( pretty e1  <>  ( pretty biOp)  <>  ( pretty e2)) <> rparen))
-                                        
-
-
+    
 --  print Unary operator
 instance Pretty UnaryOp where
     pretty Sin = pretty "sin"
