@@ -84,7 +84,7 @@ Also did some work on pretty print.  -->
 In this project, besides the terminal output, we also used `pandoc` to generate a `result.docx` showing the calculation. For the pdf version, there are some bugs that we haven't fixed yet. Here is the result in `result.docx` file. 
 
 
-![result](https://user-images.githubusercontent.com/15730783/76054021-367c9700-5f3d-11ea-93b1-196ae9afe44d.png)
+![result](https://user-images.githubusercontent.com/15730783/76132998-e4428100-5fe3-11ea-916f-9d73a3ed51f7.png)
 
 
 <!-- Since our data structure is different from what we have learned in the book and lectures, our Expression is not made of list, a lot of functions that have list operations cannot be used in our project. We have to come up with our own Rewrites, Matching and Substitutions modules. We are having some troubles implementing them. I am wondering if it better to change our data structure in order to make it doable? Should we stay or change our data structure? Thank you. -->
@@ -128,7 +128,7 @@ The input would be a string. First, the variable which we would do the derivatio
 
 Here is the calculation result showing in terminal. 
 
-![result1](https://user-images.githubusercontent.com/15730783/76054392-7e4fee00-5f3e-11ea-92ba-83ace6e8a88e.png)
+![result1](https://user-images.githubusercontent.com/15730783/76132985-cd9c2a00-5fe3-11ea-8128-fe58b8d1f7d7.png)
 
 
  
